@@ -1,0 +1,106 @@
+{
+    "name": "PlayerInputSystem",
+    "maps": [
+        {
+            "name": "MnK",
+            "id": "5d552274-11dd-49fc-bf0c-b9660d8f4bd6",
+            "actions": [
+                {
+                    "name": "WASD",
+                    "type": "Value",
+                    "id": "47938dbc-c55d-4366-8edd-1d7422c26201",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "ba583e2e-c607-495c-b427-7935f012a46a",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f0dcf7ff-67b5-481c-b426-5f4531e0c66a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "7ae25df4-855a-497d-8f9f-b8e33e75d88c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d9bcfec9-9abd-4b16-908a-c31ff12b6084",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "16befe70-4457-49a7-85de-df14faaea8ca",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Controller",
+            "id": "a535a687-7927-429c-a725-c761fc4b0dfa",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "04255876-cd11-4e60-8c2a-e656f6c0628e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c66b911-2b66-42d3-8ff9-0d2903ea6652",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
