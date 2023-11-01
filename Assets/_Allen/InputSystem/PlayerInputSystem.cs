@@ -35,6 +35,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseLook"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e198911b-b1cb-45ca-9639-2bf6201ddeb3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""WASD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d932d62d-56a1-42d8-8ede-1588c7783ae1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -129,6 +149,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         // MnK
         m_MnK = asset.FindActionMap("MnK", throwIfNotFound: true);
         m_MnK_WASD = m_MnK.FindAction("WASD", throwIfNotFound: true);
+        m_MnK_MouseLook = m_MnK.FindAction("MouseLook", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Newaction = m_Controller.FindAction("New action", throwIfNotFound: true);
@@ -194,11 +215,13 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MnK;
     private List<IMnKActions> m_MnKActionsCallbackInterfaces = new List<IMnKActions>();
     private readonly InputAction m_MnK_WASD;
+    private readonly InputAction m_MnK_MouseLook;
     public struct MnKActions
     {
         private @PlayerInputSystem m_Wrapper;
         public MnKActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @WASD => m_Wrapper.m_MnK_WASD;
+        public InputAction @MouseLook => m_Wrapper.m_MnK_MouseLook;
         public InputActionMap Get() { return m_Wrapper.m_MnK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -211,6 +234,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @WASD.started += instance.OnWASD;
             @WASD.performed += instance.OnWASD;
             @WASD.canceled += instance.OnWASD;
+            @MouseLook.started += instance.OnMouseLook;
+            @MouseLook.performed += instance.OnMouseLook;
+            @MouseLook.canceled += instance.OnMouseLook;
         }
 
         private void UnregisterCallbacks(IMnKActions instance)
@@ -218,6 +244,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @WASD.started -= instance.OnWASD;
             @WASD.performed -= instance.OnWASD;
             @WASD.canceled -= instance.OnWASD;
+            @MouseLook.started -= instance.OnMouseLook;
+            @MouseLook.performed -= instance.OnMouseLook;
+            @MouseLook.canceled -= instance.OnMouseLook;
         }
 
         public void RemoveCallbacks(IMnKActions instance)
@@ -284,6 +313,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     public interface IMnKActions
     {
         void OnWASD(InputAction.CallbackContext context);
+        void OnMouseLook(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {
