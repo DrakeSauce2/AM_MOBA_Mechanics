@@ -6,35 +6,22 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerCharacter : Character
-{
-    UIManager _UIManager;
-    PlayerInputSystem playerInputActions;
+{  
+    private PlayerInputSystem playerInputActions;
+    private PlayerInfo playerInfo;
 
-    private ValueGauge healthGauge;
-    private ValueGauge manaGauge;
-    private ValueGauge expGauge;
+    bool isInitialized = false;
 
-    [SerializeField] private float rotationSpeed;
-
-    private void Awake()
+    public void Initialize(PlayerInfo playerInfo)
     {
-        Initialize(this);
-
-        _UIManager = UIManager.Instance;
-
+        BaseInitialize(this);
         InitializeMovementComponents();
-        InitializeValueGauges();
-    }
 
-    private void InitializeValueGauges()
-    {
-        healthGauge = Instantiate(_UIManager.ValueBarPrefab, _UIManager.PlayerValueGaugesTransform).GetComponent<ValueGauge>();
-        manaGauge = Instantiate(_UIManager.ValueBarPrefab, _UIManager.PlayerValueGaugesTransform).GetComponent<ValueGauge>();
-        expGauge = Instantiate(_UIManager.ValueBarPrefab, _UIManager.PlayerValueGaugesTransform).GetComponent<ValueGauge>();
+        Debug.Log($"{_MoveComponent}");
 
-        healthGauge.Initialize(GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.green);
-        manaGauge.Initialize(GetStats().TryGetStatValue(Stat.MAXMANA), Color.blue);
-        expGauge.Initialize(GetStats().TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
+        this.playerInfo = playerInfo;
+
+        isInitialized = true;
     }
 
     private void InitializeMovementComponents()
@@ -47,6 +34,8 @@ public class PlayerCharacter : Character
     Vector2 refVel = Vector2.zero;
     private void FixedUpdate()
     {
+        if (!isInitialized) return;
+
         MovePlayer();
     }
 
@@ -56,18 +45,14 @@ public class PlayerCharacter : Character
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0;
-
         _MoveComponent.Move(move);
 
         animInput = Vector2.SmoothDamp(animInput, moveInput, ref refVel, 0.2f);
-
-        animator.SetFloat("xVel", animInput.x);
-        animator.SetFloat("yVel", animInput.y);
+        animator.SetFloat("xVel", animInput.y);
+        animator.SetFloat("yVel", animInput.x);
 
         Quaternion targetRotation = Quaternion.LookRotation(cameraTransform.forward, Vector3.up);
-
         transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
-
     }
 
 }

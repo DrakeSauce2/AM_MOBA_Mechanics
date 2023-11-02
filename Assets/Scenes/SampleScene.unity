@@ -1056,7 +1056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766817076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.070889026, y: 0.000000016643243, z: -0.000000001182799, w: 0.9974842}
+  m_LocalRotation: {x: 0.070889026, y: 0.00000001664324, z: -0.0000000011827987, w: 0.9974842}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1811,7 +1811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131785793}
   - component: {fileID: 2131785795}
-  - component: {fileID: 2131785794}
+  - component: {fileID: 2131785796}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -1834,7 +1834,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2131785794
+--- !u!114 &2131785795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131785792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0829beed42f33db498929fbb8067c0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2131785796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1851,18 +1863,6 @@ MonoBehaviour:
   playerDebuffIconsTransform: {fileID: 1257913861}
   valueBarPrefab: {fileID: 6967674336309472885, guid: cf05bc921cce16a46bebf24fd1a5d257,
     type: 3}
---- !u!114 &2131785795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131785792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0829beed42f33db498929fbb8067c0ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &808644703273202618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1920,11 +1920,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6139263838010585905, guid: 893eafab76ff2e94090c0337fe35f65c,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8745673984344555237, guid: 893eafab76ff2e94090c0337fe35f65c,
         type: 3}

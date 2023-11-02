@@ -103,6 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 819c72315c2762d4e9505f164f6a0ffb, type: 2}
+  healthGauge: {fileID: 0}
+  manaGauge: {fileID: 0}
+  expGauge: {fileID: 0}
+  rotationSpeed: 4
 --- !u!95 &7485100612766932970
 Animator:
   serializedVersion: 5

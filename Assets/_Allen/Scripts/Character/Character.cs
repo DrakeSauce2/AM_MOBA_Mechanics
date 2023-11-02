@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable
@@ -11,7 +12,7 @@ public class Character : MonoBehaviour, IDamageable
     protected Animator animator;
     protected Transform cameraTransform;
 
-    protected void Initialize(Character character)
+    protected void BaseInitialize(Character character)
     {
         _MoveComponent = new MovementComponent(character);
 
