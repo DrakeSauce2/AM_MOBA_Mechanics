@@ -14,18 +14,134 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsList:
   - statType: 11
-    statValue: 5
+    statValue: 1000
+    incrementValues:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    incrementIndexValue: 0
   - statType: 12
-    statValue: 5
+    statValue: 1000
+    incrementValues:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    incrementIndexValue: 0
   - statType: 0
     statValue: 0
+    incrementValues:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    incrementIndexValue: 0
   - statType: 1
     statValue: 5
+    incrementValues:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    incrementIndexValue: 0
   - statType: 2
-    statValue: 5
+    statValue: 6
+    incrementValues:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    incrementIndexValue: 0
   - statType: 8
     statValue: 5
+    incrementValues: []
+    incrementIndexValue: 0
   - statType: 7
     statValue: 5
+    incrementValues: []
+    incrementIndexValue: 0
   - statType: 13
     statValue: 5
+    incrementValues: []
+    incrementIndexValue: 0

@@ -12,16 +12,17 @@ public class PlayerCharacter : Character
 
     bool isInitialized = false;
 
-    public void Initialize(PlayerInfo playerInfo)
+    public void Initialize()
     {
         BaseInitialize(this);
         InitializeMovementComponents();
 
-        Debug.Log($"{_MoveComponent}");
-
-        this.playerInfo = playerInfo;
-
         isInitialized = true;
+    }
+
+    public void SetPlayerInfo(PlayerInfo playerInfo)
+    {
+        this.playerInfo = playerInfo;
     }
 
     private void InitializeMovementComponents()

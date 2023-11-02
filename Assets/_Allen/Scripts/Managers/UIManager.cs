@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerValueGaugesTransform;
     [SerializeField] private RectTransform playerBuffIconsTransform;
@@ -15,7 +17,15 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
-        playerValueGaugesTransform = GameObject.FindGameObjectWithTag("PlayerValueGauge").GetComponent<RectTransform>();
+        if(Instance == null) Instance = this;
+        else Destroy(Instance);
+
+    }
+
+    private void Start()
+    {
+        if(playerValueGaugesTransform == null)
+            playerValueGaugesTransform = GameObject.FindGameObjectWithTag("PlayerValueGauge").GetComponent<RectTransform>();
     }
 
     public GameObject CreateValueGauge()

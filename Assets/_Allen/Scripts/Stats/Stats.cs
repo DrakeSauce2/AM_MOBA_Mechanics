@@ -8,22 +8,23 @@ using UnityEngine.UIElements;
 public class Stats : ScriptableObject
 {
     private Dictionary<Stat, float> statsDictionary = new Dictionary<Stat, float>();
-    [SerializeField] private List<StatInfo> statsList = new List<StatInfo>();
+    private Dictionary<Stat, List<float>> incrementStatsDictionary = new Dictionary<Stat, List<float>>();
+    private Dictionary<Stat, int> incrementIndexDictionary = new Dictionary<Stat, int>();
 
-    public delegate void OnStatChange(Stat stat, float modifiedStat);
-    public event OnStatChange onStatChange;
+    [SerializeField] private List<StatInfo> statsList = new List<StatInfo>();
+    public List<StatInfo> StatsList { get { return statsList; } }
 
     public void Initialize()
     {
-        onStatChange += TrySetStatValue;
-
         foreach(StatInfo stat in statsList)
         {
             statsDictionary.Add(stat.statType, stat.statValue);
+            incrementStatsDictionary.Add(stat.statType, stat.incrementValues);
+            incrementIndexDictionary.Add(stat.statType, stat.incrementIndexValue);
         }
     }
 
-    private void TrySetStatValue(Stat stat, float modifiedStat)
+    public void TrySetStatValue(Stat stat, float modifiedStat)
     {
         if (statsDictionary.ContainsKey(stat))
         {
@@ -52,6 +53,22 @@ public class Stats : ScriptableObject
     {
 
     }
+
+    public void TryIncrementStat(Stat queryStat)
+    {
+        if (incrementStatsDictionary.ContainsKey(queryStat))
+        {
+            if (incrementStatsDictionary[queryStat].Count <= 0 || incrementStatsDictionary[queryStat].Count >= 20) return;
+
+            incrementIndexDictionary[queryStat]++;
+            statsDictionary[queryStat] = incrementStatsDictionary[queryStat][incrementIndexDictionary[queryStat]];
+        }
+        else
+        {
+            Debug.LogError($"Error Trying To Retrieve {queryStat} Stat; Stat Does Not Exist!");
+        }
+    }
+
 }
 
 #region Stat Foundation
@@ -61,6 +78,8 @@ public class StatInfo
 {
     public Stat statType;
     public float statValue;
+    public List<float> incrementValues = new List<float>(20);
+    public int incrementIndexValue = 0;
 }
 
 public enum Stat

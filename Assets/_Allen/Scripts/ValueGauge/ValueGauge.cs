@@ -8,14 +8,14 @@ public class ValueGauge : MonoBehaviour
     [SerializeField] private Image sliderFill;
     [SerializeField] private TextMeshProUGUI valueText;
 
-    public void Initialize(float maxValue, Color fillColor)
+    public void Initialize(float value, float maxValue, Color fillColor)
     {
         sliderFill.color = fillColor;
 
         slider.minValue = 0;
         slider.maxValue = maxValue;
 
-        slider.value = maxValue;
+        slider.value = value;
         valueText.text = $"{slider.value} / {slider.maxValue}";
     }
 

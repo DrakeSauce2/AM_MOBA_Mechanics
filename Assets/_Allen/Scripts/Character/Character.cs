@@ -21,11 +21,13 @@ public class Character : MonoBehaviour, IDamageable
 
         stats = Instantiate(characterStats);
         stats.Initialize();
+
+        stats.TrySetStatValue(Stat.HEALTH, stats.TryGetStatValue(Stat.MAXHEALTH));
     }
 
     public void ApplyDamage(GameObject instigator, int damage)
     {
-        //stats.TrySetStatValue(-damage);
+        stats.TrySetStatValue(Stat.HEALTH, damage);
 
         if (stats.TryGetStatValue(Stat.HEALTH) <= 0)
         {

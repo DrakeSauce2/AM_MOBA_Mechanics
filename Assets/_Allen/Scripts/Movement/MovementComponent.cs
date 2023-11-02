@@ -11,8 +11,6 @@ public class MovementComponent
 
     public MovementComponent(Character owner)
     {
-        Debug.Log($"{owner.gameObject.name} Has Created A Movement Component!");
-
         Owner = owner;
 
         controller = Owner.gameObject.AddComponent<CharacterController>();

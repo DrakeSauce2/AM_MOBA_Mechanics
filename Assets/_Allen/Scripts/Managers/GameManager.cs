@@ -2,22 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance; 
+
     [SerializeField] private List<PlayerCharacter> playerList = new List<PlayerCharacter>();
 
-    [SerializeField] private GameObject gui_GRP;
     [SerializeField] private GameObject valueBarPrefab;
     public GameObject ValueBarPrefab { get { return valueBarPrefab; } }
 
     private void Awake()
     {
-        Instantiate(gui_GRP, FindAnyObjectByType<Canvas>().transform);
+        if (Instance == null) Instance = this;
+        else Destroy(this);  
+    }
 
+    private void Start()
+    {
         foreach (PlayerCharacter player in playerList)
         {
+            player.Initialize();
             PlayerInfo newPlayerInfo = new PlayerInfo(player);
-            player.Initialize(newPlayerInfo);
+            player.SetPlayerInfo(newPlayerInfo);
         }
     }
 }
@@ -38,9 +44,9 @@ public class PlayerInfo
         manaGauge = CreateValueGauge();
         expGauge = CreateValueGauge();
 
-        healthGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.green);
-        manaGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXMANA), Color.blue);
-        expGauge.Initialize(player.GetStats().TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
+        healthGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXHEALTH), player.GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.green);
+        manaGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXMANA), player.GetStats().TryGetStatValue(Stat.MAXMANA), Color.blue);
+        expGauge.Initialize(0, player.GetStats().TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
     }
 
     private ValueGauge CreateValueGauge()
