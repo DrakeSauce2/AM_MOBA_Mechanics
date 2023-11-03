@@ -36,22 +36,27 @@ public class PlayerInfo
     public ValueGauge manaGauge { get; private set; }
     public ValueGauge expGauge { get; private set; }
 
+    public PlayerStatsUI playerStatsUI { get; private set; }
+
     public PlayerInfo(PlayerCharacter player)
     {
         _UIManager = UIManager.Instance;
+        playerStatsUI = _UIManager.PlayerStatsUI.GetComponent<PlayerStatsUI>();
 
-        healthGauge = CreateValueGauge();
-        manaGauge = CreateValueGauge();
-        expGauge = CreateValueGauge();
+        healthGauge = CreateValueGauge(_UIManager.PlayerHealthGaugeTransform);
+        manaGauge = CreateValueGauge(_UIManager.PlayerManaGaugeTransform);
+        expGauge = CreateValueGauge(_UIManager.PlayerExpGaugeTransform);
 
         healthGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXHEALTH), player.GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.green);
         manaGauge.Initialize(player.GetStats().TryGetStatValue(Stat.MAXMANA), player.GetStats().TryGetStatValue(Stat.MAXMANA), Color.blue);
         expGauge.Initialize(0, player.GetStats().TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
+
+        playerStatsUI.SetValues(player.GetStats());
     }
 
-    private ValueGauge CreateValueGauge()
+    private ValueGauge CreateValueGauge(RectTransform transform)
     {
-        GameObject valueGuageInstance = UIManager.Instance.CreateValueGauge();
+        GameObject valueGuageInstance = UIManager.Instance.CreateValueGauge(transform);
         return valueGuageInstance.GetComponent<ValueGauge>();
     }
 

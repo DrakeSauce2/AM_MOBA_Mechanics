@@ -6,12 +6,20 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("UI Prefabs")]
+    [SerializeField] private GameObject playerStatsUI;
+    public GameObject PlayerStatsUI { get { return playerStatsUI; } }
+
     [Header("UI Transforms")]
-    [SerializeField] private RectTransform playerValueGaugesTransform;
+    [SerializeField] private RectTransform playerHealthGaugeTransform;
+    [SerializeField] private RectTransform playerManaGaugeTransform;
+    [SerializeField] private RectTransform playerExpGaugeTransform;
     [SerializeField] private RectTransform playerBuffIconsTransform;
     [SerializeField] private RectTransform playerDebuffIconsTransform;
 
-    public RectTransform PlayerValueGaugesTransform { get { return playerValueGaugesTransform; }  }
+    public RectTransform PlayerHealthGaugeTransform { get { return playerHealthGaugeTransform; }  }
+    public RectTransform PlayerManaGaugeTransform { get { return playerManaGaugeTransform; } }
+    public RectTransform PlayerExpGaugeTransform { get { return playerExpGaugeTransform; } }
     public RectTransform PlayerBuffIconsTransform { get { return playerBuffIconsTransform; } }
     public RectTransform PlayerDebuffIconsTransform { get { return playerDebuffIconsTransform; } }
 
@@ -22,15 +30,9 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void Start()
+    public GameObject CreateValueGauge(RectTransform transform)
     {
-        if(playerValueGaugesTransform == null)
-            playerValueGaugesTransform = GameObject.FindGameObjectWithTag("PlayerValueGauge").GetComponent<RectTransform>();
-    }
-
-    public GameObject CreateValueGauge()
-    {
-        return Instantiate(GameManager.Instance.ValueBarPrefab, PlayerValueGaugesTransform);
+        return Instantiate(GameManager.Instance.ValueBarPrefab, transform);
     }
 
 }

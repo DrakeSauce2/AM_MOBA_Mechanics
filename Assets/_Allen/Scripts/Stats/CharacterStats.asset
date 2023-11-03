@@ -145,3 +145,19 @@ MonoBehaviour:
     statValue: 5
     incrementValues: []
     incrementIndexValue: 0
+  - statType: 5
+    statValue: 55
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 6
+    statValue: 17
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 4
+    statValue: 25
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 3
+    statValue: 12
+    incrementValues: []
+    incrementIndexValue: 0
