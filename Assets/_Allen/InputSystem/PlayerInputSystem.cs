@@ -37,10 +37,55 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseLook"",
+                    ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""e198911b-b1cb-45ca-9639-2bf6201ddeb3"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BasicAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""12076d40-007e-45a0-a928-cc01cff30af4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb6489f0-e93f-4185-bfe9-34d305b77862"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ca21e5c-cf72-4943-a9eb-3146a29a5e69"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability3"",
+                    ""type"": ""Button"",
+                    ""id"": ""910ad86a-cffd-4175-8e28-18367894bf55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability4"",
+                    ""type"": ""Button"",
+                    ""id"": ""bba13a49-bde4-4f93-a603-f3c4284756f3"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -48,7 +93,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""MnK"",
                     ""id"": ""ba583e2e-c607-495c-b427-7935f012a46a"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -103,13 +148,189 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Controller"",
+                    ""id"": ""30ef4ef5-b611-4992-a688-16788db43648"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7535dac2-46db-40a0-9a08-c9fbc796125f"",
+                    ""path"": ""<XInputController>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""cded5464-2f88-4b6c-b3f0-c63a6507df9c"",
+                    ""path"": ""<XInputController>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""70236161-8439-4778-9392-026720b0401b"",
+                    ""path"": ""<XInputController>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c07031dc-33c3-4342-9ed1-3814650a987e"",
+                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""d932d62d-56a1-42d8-8ede-1588c7783ae1"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseLook"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b4049ec-2efe-4256-bc22-9707dec6483e"",
+                    ""path"": ""<XInputController>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c08700ca-72b3-46f5-a5f5-f4638f60881e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BasicAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2aa4576-64b1-4f45-a025-50dbc67e5e9b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BasicAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5eb7a9f1-a4ba-4bd5-a3b5-5e2a3dff2093"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6c7b988-2fe3-45b8-923b-807d04d22c79"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb3982c-414b-4030-b28e-2f75b15232ae"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87d95915-ed77-4e5d-8a4b-480fbf8fd6ca"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d7d094f-5607-4dd6-af2b-8699d4c39419"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2a3d242-33a3-4833-98b4-3ea864a7a0ae"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c031869-92ae-42f5-a2ce-e4cc2dd239f7"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d44ceff-cc2f-4606-8c18-789289680ea5"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -149,7 +370,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         // MnK
         m_MnK = asset.FindActionMap("MnK", throwIfNotFound: true);
         m_MnK_WASD = m_MnK.FindAction("WASD", throwIfNotFound: true);
-        m_MnK_MouseLook = m_MnK.FindAction("MouseLook", throwIfNotFound: true);
+        m_MnK_Look = m_MnK.FindAction("Look", throwIfNotFound: true);
+        m_MnK_BasicAttack = m_MnK.FindAction("BasicAttack", throwIfNotFound: true);
+        m_MnK_Ability1 = m_MnK.FindAction("Ability1", throwIfNotFound: true);
+        m_MnK_Ability2 = m_MnK.FindAction("Ability2", throwIfNotFound: true);
+        m_MnK_Ability3 = m_MnK.FindAction("Ability3", throwIfNotFound: true);
+        m_MnK_Ability4 = m_MnK.FindAction("Ability4", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Newaction = m_Controller.FindAction("New action", throwIfNotFound: true);
@@ -215,13 +441,23 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MnK;
     private List<IMnKActions> m_MnKActionsCallbackInterfaces = new List<IMnKActions>();
     private readonly InputAction m_MnK_WASD;
-    private readonly InputAction m_MnK_MouseLook;
+    private readonly InputAction m_MnK_Look;
+    private readonly InputAction m_MnK_BasicAttack;
+    private readonly InputAction m_MnK_Ability1;
+    private readonly InputAction m_MnK_Ability2;
+    private readonly InputAction m_MnK_Ability3;
+    private readonly InputAction m_MnK_Ability4;
     public struct MnKActions
     {
         private @PlayerInputSystem m_Wrapper;
         public MnKActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @WASD => m_Wrapper.m_MnK_WASD;
-        public InputAction @MouseLook => m_Wrapper.m_MnK_MouseLook;
+        public InputAction @Look => m_Wrapper.m_MnK_Look;
+        public InputAction @BasicAttack => m_Wrapper.m_MnK_BasicAttack;
+        public InputAction @Ability1 => m_Wrapper.m_MnK_Ability1;
+        public InputAction @Ability2 => m_Wrapper.m_MnK_Ability2;
+        public InputAction @Ability3 => m_Wrapper.m_MnK_Ability3;
+        public InputAction @Ability4 => m_Wrapper.m_MnK_Ability4;
         public InputActionMap Get() { return m_Wrapper.m_MnK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -234,9 +470,24 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @WASD.started += instance.OnWASD;
             @WASD.performed += instance.OnWASD;
             @WASD.canceled += instance.OnWASD;
-            @MouseLook.started += instance.OnMouseLook;
-            @MouseLook.performed += instance.OnMouseLook;
-            @MouseLook.canceled += instance.OnMouseLook;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @BasicAttack.started += instance.OnBasicAttack;
+            @BasicAttack.performed += instance.OnBasicAttack;
+            @BasicAttack.canceled += instance.OnBasicAttack;
+            @Ability1.started += instance.OnAbility1;
+            @Ability1.performed += instance.OnAbility1;
+            @Ability1.canceled += instance.OnAbility1;
+            @Ability2.started += instance.OnAbility2;
+            @Ability2.performed += instance.OnAbility2;
+            @Ability2.canceled += instance.OnAbility2;
+            @Ability3.started += instance.OnAbility3;
+            @Ability3.performed += instance.OnAbility3;
+            @Ability3.canceled += instance.OnAbility3;
+            @Ability4.started += instance.OnAbility4;
+            @Ability4.performed += instance.OnAbility4;
+            @Ability4.canceled += instance.OnAbility4;
         }
 
         private void UnregisterCallbacks(IMnKActions instance)
@@ -244,9 +495,24 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @WASD.started -= instance.OnWASD;
             @WASD.performed -= instance.OnWASD;
             @WASD.canceled -= instance.OnWASD;
-            @MouseLook.started -= instance.OnMouseLook;
-            @MouseLook.performed -= instance.OnMouseLook;
-            @MouseLook.canceled -= instance.OnMouseLook;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @BasicAttack.started -= instance.OnBasicAttack;
+            @BasicAttack.performed -= instance.OnBasicAttack;
+            @BasicAttack.canceled -= instance.OnBasicAttack;
+            @Ability1.started -= instance.OnAbility1;
+            @Ability1.performed -= instance.OnAbility1;
+            @Ability1.canceled -= instance.OnAbility1;
+            @Ability2.started -= instance.OnAbility2;
+            @Ability2.performed -= instance.OnAbility2;
+            @Ability2.canceled -= instance.OnAbility2;
+            @Ability3.started -= instance.OnAbility3;
+            @Ability3.performed -= instance.OnAbility3;
+            @Ability3.canceled -= instance.OnAbility3;
+            @Ability4.started -= instance.OnAbility4;
+            @Ability4.performed -= instance.OnAbility4;
+            @Ability4.canceled -= instance.OnAbility4;
         }
 
         public void RemoveCallbacks(IMnKActions instance)
@@ -313,7 +579,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     public interface IMnKActions
     {
         void OnWASD(InputAction.CallbackContext context);
-        void OnMouseLook(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnBasicAttack(InputAction.CallbackContext context);
+        void OnAbility1(InputAction.CallbackContext context);
+        void OnAbility2(InputAction.CallbackContext context);
+        void OnAbility3(InputAction.CallbackContext context);
+        void OnAbility4(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {

@@ -10,12 +10,15 @@ public class PlayerCharacter : Character
     private PlayerInputSystem playerInputActions;
     private PlayerInfo playerInfo;
 
+    Vector2 animInput = Vector2.zero;
+    Vector2 refVel = Vector2.zero;
+
     bool isInitialized = false;
 
     public void Initialize()
     {
         BaseInitialize(this);
-        InitializeMovementComponents();
+        InitializeInputSystem();
 
         isInitialized = true;
     }
@@ -25,14 +28,24 @@ public class PlayerCharacter : Character
         this.playerInfo = playerInfo;
     }
 
-    private void InitializeMovementComponents()
+    private void InitializeInputSystem()
     {
         playerInputActions = new PlayerInputSystem();
         playerInputActions.MnK.Enable();
+
+        playerInputActions.MnK.BasicAttack.performed += BasicAttack;
     }
 
-    Vector2 animInput = Vector2.zero;
-    Vector2 refVel = Vector2.zero;
+    private void BasicAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            animator.SetTrigger("BasicAttack");
+            GetStats().TrySetStatValue(Stat.HEALTH, GetStats().TryGetStatValue(Stat.HEALTH) - 25);
+            //animator.ResetTrigger("BasicAttack");
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!isInitialized) return;

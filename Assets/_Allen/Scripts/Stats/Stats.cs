@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,12 +6,18 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(menuName = "Stats/BaseStats")]
 public class Stats : ScriptableObject
 {
+    
+    // Maybe Not Make 3 Dictionaries, Not Sure How Expensive Procedure Is
+
     private Dictionary<Stat, float> statsDictionary = new Dictionary<Stat, float>();
     private Dictionary<Stat, List<float>> incrementStatsDictionary = new Dictionary<Stat, List<float>>();
     private Dictionary<Stat, int> incrementIndexDictionary = new Dictionary<Stat, int>();
 
     [SerializeField] private List<StatInfo> statsList = new List<StatInfo>();
     public List<StatInfo> StatsList { get { return statsList; } }
+
+    public delegate void OnValueChanged(Stat statChanged, float value);
+    public event OnValueChanged onValueChanged;
 
     public void Initialize()
     {
@@ -24,15 +29,16 @@ public class Stats : ScriptableObject
         }
     }
 
-    public void TrySetStatValue(Stat stat, float modifiedStat)
+    public void TrySetStatValue(Stat queryStat, float value)
     {
-        if (statsDictionary.ContainsKey(stat))
+        if (statsDictionary.ContainsKey(queryStat))
         {
-            statsDictionary[stat] = modifiedStat;
+            statsDictionary[queryStat] = value;
+            onValueChanged?.Invoke(queryStat, value);
         }
         else
         {
-            Debug.LogError($"Error Trying To Retrieve {stat} Stat; Stat Does Not Exist!");
+            Debug.LogError($"Error Trying To Set {queryStat} Stat; Stat Does Not Exist On This Object!");
         }
     }
 
@@ -44,14 +50,15 @@ public class Stats : ScriptableObject
         }
         else
         {
-            Debug.LogError($"Error Trying To Retrieve {queryStat} Stat; Stat Does Not Exist!");
+            // Alternatively might want to direct this error somewhere else if Stat cannot be found, If Stat cannot be Reached then send IMMUNE
+            Debug.LogError($"Error Trying To Retrieve {queryStat} Stat; Stat Does Not Exist On This Object!");
             return 0;
         }
     }
 
     public void TryApplyStatus()
     {
-
+        // Not Sure How I Want To Approach This Yet
     }
 
     public void TryIncrementStat(Stat queryStat)
@@ -65,7 +72,7 @@ public class Stats : ScriptableObject
         }
         else
         {
-            Debug.LogError($"Error Trying To Retrieve {queryStat} Stat; Stat Does Not Exist!");
+            Debug.LogError($"Error Trying To Increment {queryStat} Stat; Stat Does Not Exist On This Object!");
         }
     }
 
@@ -97,7 +104,9 @@ public enum Stat
     ITEMSELL_COST,
     MAXHEALTH,
     MAXMANA,
-    LEVELUP_COST
+    LEVELUP_COST,
+    ATTACKSPEED,
+    BASICATTACKDAMAGE
 }
 
 #endregion

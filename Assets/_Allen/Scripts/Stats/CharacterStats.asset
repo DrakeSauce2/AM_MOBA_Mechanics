@@ -110,7 +110,7 @@ MonoBehaviour:
     - 0
     incrementIndexValue: 0
   - statType: 2
-    statValue: 6
+    statValue: 8
     incrementValues:
     - 0
     - 0
