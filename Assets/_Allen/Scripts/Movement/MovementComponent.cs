@@ -17,8 +17,10 @@ public class MovementComponent
     }
 
     // To execute move caller must own a stats object and must contain a MOVEMENT_SPEED stat.
-    public void Move(Vector3 movementDirection) 
+    public Vector3 Move(Vector3 movementDirection) 
     {
-        controller.Move(movementDirection * Owner.GetStats().TryGetStatValue(Stat.MOVEMENT_SPEED) * Time.fixedDeltaTime);
+        Vector3 move = movementDirection * Owner.GetStats().TryGetStatValue(Stat.MOVEMENT_SPEED) * Time.fixedDeltaTime;
+        controller.Move(move);
+        return move;
     }
 }

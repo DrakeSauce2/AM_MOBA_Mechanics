@@ -12,7 +12,7 @@ public class Character : MonoBehaviour, IDamageable
     protected Animator animator;
     protected Transform cameraTransform;
 
-    protected void BaseInitialize(Character character)
+    protected virtual void BaseInitialize(Character character)
     {
         _MoveComponent = new MovementComponent(character);
 
