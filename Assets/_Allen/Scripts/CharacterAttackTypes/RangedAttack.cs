@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
-public class RangedAttack : MonoBehaviour
+[CreateAssetMenu(menuName = "BasicAttacks/Ranged Attack")]
+public class RangedAttack : BasicAttack
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject attackPrefab;
+
+    private float projectileSpeed = 1000f;
+    private Vector3 spawnPoint = new Vector3 (0, 0, 0.5f);
+
+    public override void Init(GameObject owner)
     {
-        
+        Owner = owner;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Attack()
     {
-        
+        GameObject spawnedobj = Instantiate(attackPrefab, Owner.transform.position + spawnPoint, Owner.transform.rotation);
+
+        RangedProjectile projectile = spawnedobj.GetComponent<RangedProjectile>();
+        projectile.Init(Owner, projectileSpeed, Range);
+
     }
+
 }

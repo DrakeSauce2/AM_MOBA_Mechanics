@@ -9,6 +9,10 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField] private Stats characterStats;
     private Stats stats;
 
+    [Header("Attack Type")]
+    [SerializeField] private BasicAttack basicAttack;
+    public BasicAttack BasicAttackType { get { return basicAttack; } }
+
     protected Animator animator;
     protected Transform cameraTransform;
 
@@ -18,6 +22,8 @@ public class Character : MonoBehaviour, IDamageable
 
         animator = GetComponent<Animator>();
         cameraTransform = Camera.main.transform;
+
+        basicAttack.Init(character.gameObject);
 
         stats = Instantiate(characterStats);
         stats.Initialize();

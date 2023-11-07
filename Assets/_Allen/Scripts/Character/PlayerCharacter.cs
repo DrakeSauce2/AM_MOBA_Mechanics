@@ -14,9 +14,13 @@ public class PlayerCharacter : Character
     Vector2 refVel = Vector2.zero;
 
     bool isInitialized = false;
+    bool attack = false;
 
     public void Initialize()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
         BaseInitialize(this);
         InitializeInputSystem();
 
@@ -38,12 +42,24 @@ public class PlayerCharacter : Character
 
     private void BasicAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            animator.SetTrigger("BasicAttack");
-            GetStats().TrySetStatValue(Stat.HEALTH, GetStats().TryGetStatValue(Stat.HEALTH) - 25);
-            //animator.ResetTrigger("BasicAttack");
-        }
+        if (attack == true) return;
+
+        attack = true;
+
+        animator.SetTrigger("BasicAttack");
+        GetStats().TrySetStatValue(Stat.HEALTH, GetStats().TryGetStatValue(Stat.HEALTH) - 25);
+    }
+
+    private void Attack()
+    {
+        BasicAttackType.Attack();
+    }
+
+    private void ResetAttack()
+    {
+        animator.ResetTrigger("BasicAttack");
+
+        attack = false;
     }
 
     private void FixedUpdate()
