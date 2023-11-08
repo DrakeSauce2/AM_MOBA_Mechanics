@@ -8,12 +8,16 @@ public class RangedProjectile : MonoBehaviour
     Rigidbody rBody;
     Vector3 startPos = Vector3.zero;
 
+    float damage = 0;
     float distanceTravelled = 0f;
     float maxDistance = 1f;
 
-    public void Init(GameObject owner, float projectileSpeed, float maxDistance)
+    bool isInitialized = false;
+
+    public void Init(GameObject owner, float projectileSpeed, float maxDistance, float damage)
     {
         Owner = owner;
+        this.damage = damage;
 
         this.maxDistance = maxDistance;
         startPos = transform.position;
@@ -21,10 +25,14 @@ public class RangedProjectile : MonoBehaviour
         rBody = GetComponent<Rigidbody>();
 
         rBody.AddForce(transform.forward * projectileSpeed * Time.fixedDeltaTime, ForceMode.Impulse);
+
+        isInitialized = true;
     }
 
     private void FixedUpdate()
     {
+       // if (isInitialized == false) return;
+ 
         distanceTravelled = Vector3.Distance(startPos, transform.position);
 
         if (distanceTravelled >= maxDistance)
@@ -35,7 +43,19 @@ public class RangedProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //if (isInitialized == false) return;
         if (other.gameObject == Owner) return;
+
+        Character hitCharacter = other.GetComponent<Character>();
+        if (!hitCharacter)
+        {
+            Debug.Log($"Character Not Found On Hit Object");
+            Destroy(gameObject);
+            return;
+        }
+        Debug.Log($"{hitCharacter} Found! Applying Damage");
+        hitCharacter.ApplyDamage(Owner, damage);
+
         Destroy(gameObject);
     }
 

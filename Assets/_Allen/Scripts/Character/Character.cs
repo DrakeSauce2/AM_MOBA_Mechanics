@@ -31,9 +31,9 @@ public class Character : MonoBehaviour, IDamageable
         stats.TrySetStatValue(Stat.HEALTH, stats.TryGetStatValue(Stat.MAXHEALTH));
     }
 
-    public void ApplyDamage(GameObject instigator, int damage)
+    public void ApplyDamage(GameObject instigator, float damage)
     {
-        stats.TrySetStatValue(Stat.HEALTH, damage);
+        stats.TrySetStatValue(Stat.HEALTH, stats.TryGetStatValue(Stat.HEALTH) - damage);
 
         if (stats.TryGetStatValue(Stat.HEALTH) <= 0)
         {

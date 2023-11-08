@@ -53,7 +53,7 @@ public class PlayerInfo
         manaGauge = CreateValueGauge(_UIManager.PlayerManaGaugeTransform);
         expGauge = CreateValueGauge(_UIManager.PlayerExpGaugeTransform);
 
-        healthGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXHEALTH), ownerStats.TryGetStatValue(Stat.MAXHEALTH), Color.green);
+        healthGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXHEALTH), ownerStats.TryGetStatValue(Stat.MAXHEALTH), Color.red);
         manaGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXMANA), ownerStats.TryGetStatValue(Stat.MAXMANA), Color.blue);
         expGauge.Initialize(0, ownerStats.TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,14 @@ public enum MinionType
 [RequireComponent(typeof(NavMeshAgent))]
 public class Minion : Character
 {
+    UIManager _UIManager;
+
     [Header("Minion Type")]
     [SerializeField] private MinionType minionType;
+
+    [Header("Health")]
+    [SerializeField] private Transform healthAttachPoint;
+    ValueGauge healthGauge;
 
     [Header("Nav Mesh Detection")]
     [SerializeField] private float detectionRange;
@@ -31,6 +38,30 @@ public class Minion : Character
     private void Awake()
     {
         Init();
+        _UIManager = UIManager.Instance;
+
+        healthGauge = CreateValueGauge(FindAnyObjectByType<Canvas>().GetComponent<RectTransform>());
+        healthGauge.Initialize(GetStats().TryGetStatValue(Stat.HEALTH), GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.red);
+        UIAttachComponent attachComponent = healthGauge.gameObject.AddComponent<UIAttachComponent>();
+        attachComponent.Init(healthAttachPoint);
+
+        minionStats.onValueChanged -= UpdateHealthBar;
+        minionStats.onValueChanged += UpdateHealthBar;
+    }
+
+    private ValueGauge CreateValueGauge(RectTransform transform)
+    {
+        GameObject valueGuageInstance = UIManager.Instance.CreateValueGauge(transform);
+        return valueGuageInstance.GetComponent<ValueGauge>();
+    }
+
+    private void UpdateHealthBar(Stat statChanged, float value)
+    {
+        if (statChanged == Stat.HEALTH)
+        {
+            healthGauge.SetValue(value);
+            return;
+        }
     }
 
     public void Init()
@@ -57,9 +88,7 @@ public class Minion : Character
     {
         if (isInitialized == false) return;
 
-        animator.SetFloat("Velocity", navAgent.velocity.normalized.magnitude);
-
-        MoveToTarget();
+        
     }
 
     private void Attack()
@@ -97,6 +126,8 @@ public class Minion : Character
                 closestTargetDistance = distance;
             }
         }
+
+        if(!detectedTarget) return null;
 
         if (Physics.Raycast(transform.position, detectedTarget.position, detectionRange, lookMask))
         {

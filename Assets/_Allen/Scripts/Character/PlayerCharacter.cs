@@ -47,7 +47,7 @@ public class PlayerCharacter : Character
         attack = true;
 
         animator.SetTrigger("BasicAttack");
-        GetStats().TrySetStatValue(Stat.HEALTH, GetStats().TryGetStatValue(Stat.HEALTH) - 25);
+        ApplyDamage(gameObject, 25);
     }
 
     private void Attack()

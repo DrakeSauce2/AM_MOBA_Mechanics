@@ -161,3 +161,11 @@ MonoBehaviour:
     statValue: 12
     incrementValues: []
     incrementIndexValue: 0
+  - statType: 15
+    statValue: 100
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 14
+    statValue: 12
+    incrementValues: []
+    incrementIndexValue: 0

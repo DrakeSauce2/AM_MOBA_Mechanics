@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -7,6 +5,9 @@ using static UnityEngine.UI.GridLayoutGroup;
 public class RangedAttack : BasicAttack
 {
     [SerializeField] private GameObject attackPrefab;
+    [Header("Damage")]
+    [SerializeField, Range(1, 2)] private float damageScale;
+    private float damage;
 
     private float projectileSpeed = 1000f;
     private Vector3 spawnPoint = new Vector3 (0, 0, 0.5f);
@@ -14,6 +15,7 @@ public class RangedAttack : BasicAttack
     public override void Init(GameObject owner)
     {
         Owner = owner;
+        damage = Owner.GetComponent<Character>().GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE);
     }
 
     public override void Attack()
@@ -21,8 +23,7 @@ public class RangedAttack : BasicAttack
         GameObject spawnedobj = Instantiate(attackPrefab, Owner.transform.position + spawnPoint, Owner.transform.rotation);
 
         RangedProjectile projectile = spawnedobj.GetComponent<RangedProjectile>();
-        projectile.Init(Owner, projectileSpeed, Range);
-
+        projectile.Init(Owner, projectileSpeed, Range, damage);
     }
 
 }

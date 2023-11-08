@@ -15,3 +15,4 @@ MonoBehaviour:
   attackRange: 14
   attackPrefab: {fileID: 4302665214818176020, guid: aedaaa808690eec4e86416cd504bb4f3,
     type: 3}
+  damageScale: 1
