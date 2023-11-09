@@ -7,8 +7,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [Header("UI Prefabs")]
+    [SerializeField] private GameObject playerHUDbar;
     [SerializeField] private GameObject playerStatsUI;
     public GameObject PlayerStatsUI { get { return playerStatsUI; } }
+    public GameObject PlayerHUDbar { get { return playerHUDbar; } }
 
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerHealthGaugeTransform;

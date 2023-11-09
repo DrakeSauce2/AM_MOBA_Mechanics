@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class UIAttachComponent : MonoBehaviour
 {
+    private Camera cam;
     private Transform attachPoint;
+    private float cullingDistance = 50f;
 
     public void Init(Transform attachTransform)
     {
         attachPoint = attachTransform;
+        cam = Camera.main;
     }
 
     void Update()
     {
         if (attachPoint == null) return;
 
-        transform.position = Camera.main.WorldToScreenPoint(attachPoint.position);
+        transform.position = cam.WorldToScreenPoint(attachPoint.position);
     }
 }

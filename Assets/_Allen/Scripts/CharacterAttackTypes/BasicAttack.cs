@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
-[CreateAssetMenu(menuName = "BasicAttacks/Base Basic Attack")]
 public abstract class BasicAttack : ScriptableObject
 {
     public GameObject Owner { get; protected set; }

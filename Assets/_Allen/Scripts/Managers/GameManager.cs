@@ -33,9 +33,12 @@ public class GameManager : MonoBehaviour
 public class PlayerInfo 
 {
     public UIManager _UIManager { get; private set; }
-    public ValueGauge healthGauge { get; private set; }
-    public ValueGauge manaGauge { get; private set; }
-    public ValueGauge expGauge { get; private set; }
+    public PlayerHUDbar _HUDbar { get; private set; }
+
+    public ValueGauge HealthGauge { get; private set; }
+    public ValueGauge ManaGauge { get; private set; }
+    public ValueGauge ExpGauge { get; private set; }
+
     public PlayerStatsUI playerStatsUI { get; private set; }
 
     private Stats ownerStats;
@@ -46,16 +49,18 @@ public class PlayerInfo
         playerStatsUI = _UIManager.PlayerStatsUI.GetComponent<PlayerStatsUI>();
         ownerStats = player.GetStats();
 
+        _HUDbar = _UIManager.PlayerHUDbar.GetComponent<PlayerHUDbar>();
+
         ownerStats.onValueChanged -= UpdateUI;
         ownerStats.onValueChanged += UpdateUI;
 
-        healthGauge = CreateValueGauge(_UIManager.PlayerHealthGaugeTransform);
-        manaGauge = CreateValueGauge(_UIManager.PlayerManaGaugeTransform);
-        expGauge = CreateValueGauge(_UIManager.PlayerExpGaugeTransform);
+        HealthGauge = _HUDbar.HealthGauge;
+        ManaGauge = _HUDbar.ManaGauge;
+        ExpGauge = _HUDbar.ExpGauge;
 
-        healthGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXHEALTH), ownerStats.TryGetStatValue(Stat.MAXHEALTH), Color.red);
-        manaGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXMANA), ownerStats.TryGetStatValue(Stat.MAXMANA), Color.blue);
-        expGauge.Initialize(0, ownerStats.TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
+        HealthGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXHEALTH), ownerStats.TryGetStatValue(Stat.MAXHEALTH), Color.red);
+        ManaGauge.Initialize(ownerStats.TryGetStatValue(Stat.MAXMANA), ownerStats.TryGetStatValue(Stat.MAXMANA), Color.blue);
+        ExpGauge.Initialize(0, ownerStats.TryGetStatValue(Stat.LEVELUP_COST), Color.yellow);
 
         playerStatsUI.SetValues(ownerStats);
     }
@@ -65,19 +70,19 @@ public class PlayerInfo
     {
         if (statChanged == Stat.HEALTH)
         {
-            healthGauge.SetValue(value);
+            HealthGauge.SetValue(value);
             return;
         }
 
         if (statChanged == Stat.MANA)
         {
-            manaGauge.SetValue(value);
+            ManaGauge.SetValue(value);
             return;
         }
 
         if (statChanged == Stat.EXPERIENCE)
         {
-            expGauge.SetValue(value);
+            ExpGauge.SetValue(value);
             return;
         }
     }

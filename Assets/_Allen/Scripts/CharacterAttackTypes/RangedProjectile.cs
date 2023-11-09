@@ -5,6 +5,8 @@ public class RangedProjectile : MonoBehaviour
 {
     public GameObject Owner { get; private set; }
 
+    [SerializeField] private GameObject hitParticlePrefab;
+
     Rigidbody rBody;
     Vector3 startPos = Vector3.zero;
 
@@ -13,6 +15,11 @@ public class RangedProjectile : MonoBehaviour
     float maxDistance = 1f;
 
     bool isInitialized = false;
+
+    private void OnDestroy()
+    {
+        Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
+    }
 
     public void Init(GameObject owner, float projectileSpeed, float maxDistance, float damage)
     {
@@ -43,8 +50,8 @@ public class RangedProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (isInitialized == false) return;
         if (other.gameObject == Owner) return;
+        Destroy(gameObject);
 
         Character hitCharacter = other.GetComponent<Character>();
         if (!hitCharacter)
@@ -55,8 +62,6 @@ public class RangedProjectile : MonoBehaviour
         }
         Debug.Log($"{hitCharacter} Found! Applying Damage");
         hitCharacter.ApplyDamage(Owner, damage);
-
-        Destroy(gameObject);
     }
 
 }

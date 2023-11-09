@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -67,6 +68,7 @@ public class Minion : Character
     public void Init()
     {
         BaseInitialize(this);
+
         minionStats = GetStats();
 
         navAgent = GetComponent<NavMeshAgent>();

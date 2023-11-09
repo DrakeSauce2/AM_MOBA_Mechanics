@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Player Ranged Auto
   m_EditorClassIdentifier: 
   attackRange: 14
-  attackPrefab: {fileID: 4302665214818176020, guid: aedaaa808690eec4e86416cd504bb4f3,
+  attackPrefab: {fileID: 4302665214818176020, guid: 6fade2aa211bfa44b90c184cb0d6f8d4,
     type: 3}
   damageScale: 1

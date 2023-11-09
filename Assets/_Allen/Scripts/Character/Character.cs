@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour, IDamageable
 {
@@ -22,21 +23,27 @@ public class Character : MonoBehaviour, IDamageable
 
         animator = GetComponent<Animator>();
         cameraTransform = Camera.main.transform;
-
-        basicAttack.Init(character.gameObject);
-
+ 
         stats = Instantiate(characterStats);
         stats.Initialize();
 
         stats.TrySetStatValue(Stat.HEALTH, stats.TryGetStatValue(Stat.MAXHEALTH));
     }
 
+    public void SetBasicAttack(GameObject ownerAttackObject)
+    {
+        basicAttack.Init(ownerAttackObject);
+
+    }
+
     public void ApplyDamage(GameObject instigator, float damage)
     {
-        stats.TrySetStatValue(Stat.HEALTH, stats.TryGetStatValue(Stat.HEALTH) - damage);
+        float currentHealth = stats.TryGetStatValue(Stat.HEALTH);
+        stats.TrySetStatValue(Stat.HEALTH, currentHealth - damage);
 
-        if (stats.TryGetStatValue(Stat.HEALTH) <= 0)
+        if (currentHealth <= 0)
         {
+            Debug.Log($"Character Is Dead");
             // Start Death
             // GameManager.Instance.Kill(gameObject, instigator)
         }
