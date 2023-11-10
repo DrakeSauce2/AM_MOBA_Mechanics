@@ -106,7 +106,8 @@ public enum Stat
     MAXMANA,
     LEVELUP_COST,
     ATTACKSPEED,
-    BASICATTACKDAMAGE
+    BASICATTACKDAMAGE,
+    LEVEL
 }
 
 #endregion

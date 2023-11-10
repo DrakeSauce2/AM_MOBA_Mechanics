@@ -16,11 +16,6 @@ public class RangedProjectile : MonoBehaviour
 
     bool isInitialized = false;
 
-    private void OnDestroy()
-    {
-        Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
-    }
-
     public void Init(GameObject owner, float projectileSpeed, float maxDistance, float damage)
     {
         Owner = owner;
@@ -60,6 +55,8 @@ public class RangedProjectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
         Debug.Log($"{hitCharacter} Found! Applying Damage");
         hitCharacter.ApplyDamage(Owner, damage);
     }

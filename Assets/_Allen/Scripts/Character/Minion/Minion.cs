@@ -98,6 +98,12 @@ public class Minion : Character
 
     }
 
+    public override void StartDeath()
+    {
+        Destroy(healthGauge.gameObject);
+        Destroy(gameObject);
+    }
+
     #region Navigation
 
     private void MoveToTarget()

@@ -29,17 +29,19 @@ public class PlayerCharacter : Character
 
         SetBasicAttack(gameObject);
 
+        isInitialized = true;
+    }
+
+    public void InitializePlayerInfo(PlayerInfo playerInfo)
+    {
+        this.playerInfo = playerInfo;
+
         for (int i = 0; i < activeAbilities.Count; i++)
         {
             activeAbilities[i].Init(playerInfo._HUDbar.AbilitySlotList[i]);
         }
 
-        isInitialized = true;
-    }
-
-    public void SetPlayerInfo(PlayerInfo playerInfo)
-    {
-        this.playerInfo = playerInfo;
+        playerInfo._HUDbar.SetCharacteIcon(CharacterSpriteIcon);
     }
 
     private void InitializeInputSystem()
@@ -93,7 +95,6 @@ public class PlayerCharacter : Character
         attack = true;
 
         animator.SetTrigger("BasicAttack");
-        ApplyDamage(gameObject, 25);
     }
 
     private void Attack()

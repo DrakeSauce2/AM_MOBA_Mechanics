@@ -18,6 +18,11 @@ public class UIAttachComponent : MonoBehaviour
     {
         if (attachPoint == null) return;
 
+        float distance = Vector3.Distance(cam.transform.position, attachPoint.position);
+
+        float scale = 1 - (distance / cullingDistance);
+        transform.localScale = new Vector3(scale, scale, scale);
+
         transform.position = cam.WorldToScreenPoint(attachPoint.position);
     }
 }

@@ -12,6 +12,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject valueBarPrefab;
     public GameObject ValueBarPrefab { get { return valueBarPrefab; } }
 
+    internal void AwardKill(GameObject instigator, GameObject victim)
+    {
+        Character instigatingCharacter = instigator.GetComponent<Character>();
+        Stats instigatingStats = instigatingCharacter.GetStats();
+
+        Character victimCharacter = instigator.GetComponent<Character>();
+        Stats victimStats = victimCharacter.GetStats();
+
+        float experienceToGive = victimStats.TryGetStatValue(Stat.LEVEL) * 12f;
+        instigatingStats.TrySetStatValue(Stat.EXPERIENCE, instigatingStats.TryGetStatValue(Stat.EXPERIENCE) + experienceToGive);
+
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -24,7 +37,7 @@ public class GameManager : MonoBehaviour
         {
             player.Initialize();
             PlayerInfo newPlayerInfo = new PlayerInfo(player);
-            player.SetPlayerInfo(newPlayerInfo);
+            player.InitializePlayerInfo(newPlayerInfo);
         }
     }
 }

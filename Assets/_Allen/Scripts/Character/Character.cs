@@ -14,6 +14,10 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField] private BasicAttack basicAttack;
     public BasicAttack BasicAttackType { get { return basicAttack; } }
 
+    [Header("Character Icon")]
+    [SerializeField] private Sprite characterSpriteIcon;
+    public Sprite CharacterSpriteIcon { get { return characterSpriteIcon; } }
+
     protected Animator animator;
     protected Transform cameraTransform;
 
@@ -44,9 +48,14 @@ public class Character : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             Debug.Log($"Character Is Dead");
-            // Start Death
-            // GameManager.Instance.Kill(gameObject, instigator)
+            StartDeath();
+            GameManager.Instance.AwardKill(instigator, gameObject);
         }
+    }
+
+    public virtual void StartDeath()
+    {
+
     }
 
     public Stats GetStats() => stats;

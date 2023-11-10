@@ -20,7 +20,7 @@ public class RangedAttack : BasicAttack
 
     public override void Attack()
     {
-        GameObject spawnedobj = Instantiate(attackPrefab, Owner.transform.position + spawnPoint, Owner.transform.rotation);
+        GameObject spawnedobj = Instantiate(attackPrefab, Owner.transform.position, Owner.transform.rotation);
 
         RangedProjectile projectile = spawnedobj.GetComponent<RangedProjectile>();
         projectile.Init(Owner, projectileSpeed, Range, damage);

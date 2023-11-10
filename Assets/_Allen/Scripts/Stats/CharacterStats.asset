@@ -142,7 +142,7 @@ MonoBehaviour:
     incrementValues: []
     incrementIndexValue: 0
   - statType: 13
-    statValue: 5
+    statValue: 100
     incrementValues: []
     incrementIndexValue: 0
   - statType: 5
@@ -167,5 +167,9 @@ MonoBehaviour:
     incrementIndexValue: 0
   - statType: 14
     statValue: 12
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 16
+    statValue: 2
     incrementValues: []
     incrementIndexValue: 0
