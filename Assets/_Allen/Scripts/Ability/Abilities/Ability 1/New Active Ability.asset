@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f30aee350d36e143a0345e21df55355, type: 3}
   m_Name: New Active Ability
   m_EditorClassIdentifier: 
-  castingState: 2
+  castingState: 1
   abilityImageSprite: {fileID: 21300000, guid: c46be55a65cb30e44b7c89e3c0d531da, type: 3}
   cooldown: 2
   abilityOutlinePrefab: {fileID: 5339056299074291446, guid: 6eae5b45c99673c49ba4ebb27e428eb3,
     type: 3}
-  outlinePositionOffset: {x: 0, y: 1, z: 1}
+  outlinePositionOffset: {x: 0, y: 0, z: 1.1}

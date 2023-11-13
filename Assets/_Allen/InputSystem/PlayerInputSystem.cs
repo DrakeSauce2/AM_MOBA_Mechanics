@@ -89,6 +89,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""4949943e-ab32-4987-bdcd-9467d2d329a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Ability4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbca1f05-2efc-4221-9006-fc06524656c2"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -376,6 +396,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_MnK_Ability2 = m_MnK.FindAction("Ability2", throwIfNotFound: true);
         m_MnK_Ability3 = m_MnK.FindAction("Ability3", throwIfNotFound: true);
         m_MnK_Ability4 = m_MnK.FindAction("Ability4", throwIfNotFound: true);
+        m_MnK_StopAbility = m_MnK.FindAction("StopAbility", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Newaction = m_Controller.FindAction("New action", throwIfNotFound: true);
@@ -447,6 +468,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_MnK_Ability2;
     private readonly InputAction m_MnK_Ability3;
     private readonly InputAction m_MnK_Ability4;
+    private readonly InputAction m_MnK_StopAbility;
     public struct MnKActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -458,6 +480,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @Ability2 => m_Wrapper.m_MnK_Ability2;
         public InputAction @Ability3 => m_Wrapper.m_MnK_Ability3;
         public InputAction @Ability4 => m_Wrapper.m_MnK_Ability4;
+        public InputAction @StopAbility => m_Wrapper.m_MnK_StopAbility;
         public InputActionMap Get() { return m_Wrapper.m_MnK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -488,6 +511,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Ability4.started += instance.OnAbility4;
             @Ability4.performed += instance.OnAbility4;
             @Ability4.canceled += instance.OnAbility4;
+            @StopAbility.started += instance.OnStopAbility;
+            @StopAbility.performed += instance.OnStopAbility;
+            @StopAbility.canceled += instance.OnStopAbility;
         }
 
         private void UnregisterCallbacks(IMnKActions instance)
@@ -513,6 +539,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Ability4.started -= instance.OnAbility4;
             @Ability4.performed -= instance.OnAbility4;
             @Ability4.canceled -= instance.OnAbility4;
+            @StopAbility.started -= instance.OnStopAbility;
+            @StopAbility.performed -= instance.OnStopAbility;
+            @StopAbility.canceled -= instance.OnStopAbility;
         }
 
         public void RemoveCallbacks(IMnKActions instance)
@@ -585,6 +614,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnAbility2(InputAction.CallbackContext context);
         void OnAbility3(InputAction.CallbackContext context);
         void OnAbility4(InputAction.CallbackContext context);
+        void OnStopAbility(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {

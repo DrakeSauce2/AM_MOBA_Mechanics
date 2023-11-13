@@ -51,6 +51,7 @@ public class PlayerCharacter : Character
 
         playerInputActions.MnK.BasicAttack.performed += BasicAttack;
 
+        playerInputActions.MnK.StopAbility.performed += CancelAbility;
         playerInputActions.MnK.Ability1.performed += StartCastAbility_1;
         playerInputActions.MnK.Ability2.performed += StartCastAbility_2;
         playerInputActions.MnK.Ability3.performed += StartCastAbility_3;
@@ -61,24 +62,32 @@ public class PlayerCharacter : Character
 
     #region Abilities
 
+    private void CancelAbility(InputAction.CallbackContext context)
+    {
+        foreach (ActiveAbility ability in activeAbilities)
+        {
+            ability.StopCast();
+        }
+    }
+
     private void StartCastAbility_1(InputAction.CallbackContext context)
     {
-        activeAbilities[0].UseAbility();
+        activeAbilities[0].Cast(animator, 0);
     }
 
     private void StartCastAbility_2(InputAction.CallbackContext context)
     {
-        activeAbilities[1].UseAbility();
+        activeAbilities[1].Cast(animator, 1);
     }
 
     private void StartCastAbility_3(InputAction.CallbackContext context)
     {
-        activeAbilities[2].UseAbility();
+        activeAbilities[2].Cast(animator, 2);
     }
 
     private void StartCastAbility_4(InputAction.CallbackContext context)
     {
-        activeAbilities[3].UseAbility();
+        activeAbilities[3].Cast(animator, 3);
     }
 
     #endregion
@@ -107,6 +116,11 @@ public class PlayerCharacter : Character
         animator.ResetTrigger("BasicAttack");
 
         attack = false;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()

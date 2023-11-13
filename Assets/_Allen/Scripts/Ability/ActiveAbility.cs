@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static ActiveAbility;
 
 public enum CastingState
 {
+    NONE,
     STARTCAST,
-    CASTED,
     CASTING
 }
 
@@ -30,6 +31,15 @@ public class ActiveAbility : ScriptableObject
     private GameObject instancedAbilityOutline;
     [SerializeField] private Vector3 outlinePositionOffset;
 
+    //
+
+    public delegate void OnAbilityStart();
+    public delegate void OnAbilityEnd();
+    public OnAbilityStart onAbilityStart;   
+    public OnAbilityEnd onAbilityEnd;
+
+    //
+
     public void Init(GameObject owner, AbilitySlot abilitySlot)
     {
         Owner = owner;
@@ -42,23 +52,48 @@ public class ActiveAbility : ScriptableObject
         instancedAbilityOutline.SetActive(false);
     }
 
-    public virtual void UseAbility()
-    {      
+    public void Cast(Animator characterAnimator, int abilityIndex)
+    {
+        if (slot.cooldown < cooldown) return;
+
         switch (castingState)
         {
-            case CastingState.STARTCAST:
-                instancedAbilityOutline.SetActive(true);
-                castingState = CastingState.CASTED;
+            case CastingState.NONE:
+                StartAbility();
                 return;
-            case CastingState.CASTED:
-                instancedAbilityOutline.SetActive(false);
-                castingState = CastingState.CASTING;
+            case CastingState.STARTCAST:
+                characterAnimator.SetTrigger($"Ability{abilityIndex + 1}");
+                UseAbility();
                 return;
             case CastingState.CASTING:
-                slot.StartCooldown(cooldown);
-                castingState = CastingState.STARTCAST;
+
                 return;
-        } 
+        }
+    }
+
+    public void StopCast()
+    {
+        instancedAbilityOutline.SetActive(false);
+        castingState = CastingState.NONE;
+    }
+
+    private void StartAbility()
+    {
+        
+        castingState = CastingState.STARTCAST;
+        instancedAbilityOutline.SetActive(true);
+    }
+
+    private void EndAbility()
+    {
+        onAbilityEnd?.Invoke();
+    }
+
+    protected virtual void UseAbility()
+    {   
+        onAbilityStart?.Invoke();  
+        slot.StartCooldown(cooldown);
+        instancedAbilityOutline.SetActive(true);
     }
 
 }

@@ -12,7 +12,8 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] Image abilityCooldownFill;
     [SerializeField] List<GameObject> levelCount = new List<GameObject>();
 
-    float maxCooldown, cooldown;
+    float maxCooldown;
+    public float cooldown { get; private set; }
     bool onCooldown = false;
 
     public void Init(Sprite imageSprite)
@@ -21,6 +22,7 @@ public class AbilitySlot : MonoBehaviour
         cooldownTimeText.text = $"";
         abilityCooldownFill.fillAmount = 0;
 
+        cooldown = 9999f;
         /*
         foreach (GameObject level in levelCount)
         {
