@@ -38,7 +38,7 @@ public class PlayerCharacter : Character
 
         for (int i = 0; i < activeAbilities.Count; i++)
         {
-            activeAbilities[i].Init(playerInfo._HUDbar.AbilitySlotList[i]);
+            activeAbilities[i].Init(gameObject, playerInfo._HUDbar.AbilitySlotList[i]);
         }
 
         playerInfo._HUDbar.SetCharacteIcon(CharacterSpriteIcon);

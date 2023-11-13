@@ -44,6 +44,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         float currentHealth = stats.TryGetStatValue(Stat.HEALTH);
         stats.TrySetStatValue(Stat.HEALTH, currentHealth - damage);
+        currentHealth = stats.TryGetStatValue(Stat.HEALTH);
 
         if (currentHealth <= 0)
         {
