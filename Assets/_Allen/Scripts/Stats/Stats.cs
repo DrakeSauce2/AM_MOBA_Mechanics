@@ -29,6 +29,42 @@ public class Stats : ScriptableObject
         }
     }
 
+    public void TryAddStatValue(Stats stats)
+    {
+        foreach(StatInfo statToAdd in stats.StatsList)
+        {
+            if (CheckIsStaticStat(statToAdd.statType)) break;
+
+            if (statsDictionary.ContainsKey(statToAdd.statType))
+            {
+                statsDictionary[statToAdd.statType] += statToAdd.statValue;
+                onValueChanged?.Invoke(statToAdd.statType, statsDictionary[statToAdd.statType]);
+            }
+            else
+            {
+                Debug.LogError($"Error Trying To Set {statToAdd.statType} Stat; Stat Does Not Exist On This Object!");
+            }
+        }
+    }
+
+    public void TryRemoveStatValue(Stats stats)
+    {
+        foreach (StatInfo statToAdd in stats.StatsList)
+        {
+            if (CheckIsStaticStat(statToAdd.statType)) break;
+
+            if (statsDictionary.ContainsKey(statToAdd.statType))
+            {
+                statsDictionary[statToAdd.statType] -= statToAdd.statValue;
+                onValueChanged?.Invoke(statToAdd.statType, statsDictionary[statToAdd.statType]);
+            }
+            else
+            {
+                Debug.LogError($"Error Trying To Set {statToAdd.statType} Stat; Stat Does Not Exist On This Object!");
+            }
+        }
+    }
+
     public void TrySetStatValue(Stat queryStat, float value)
     {
         if (statsDictionary.ContainsKey(queryStat))
@@ -76,6 +112,22 @@ public class Stats : ScriptableObject
         }
     }
 
+    public bool CheckIsStaticStat(Stat queryStat)
+    {
+        switch (queryStat)
+        {
+            case Stat.LEVEL:
+            case Stat.LEVELUP_COST:
+            case Stat.ITEMSELL_COST:
+            case Stat.ITEMBUY_COST:
+            case Stat.GOLD:
+            case Stat.EXPERIENCE:
+                return true;
+        }
+
+        return false;
+    }
+
 }
 
 #region Stat Foundation
@@ -91,6 +143,7 @@ public class StatInfo
 
 public enum Stat
 {
+    // Static Being Not Changed By Items
     HEALTH,
     MANA,
     MOVEMENT_SPEED,
@@ -98,16 +151,16 @@ public enum Stat
     MAGICAL_DEFENSE,
     PHYSICAL_POWER,
     MAGICAL_POWER,
-    EXPERIENCE,
-    GOLD,
-    ITEMBUY_COST,
-    ITEMSELL_COST,
+    EXPERIENCE, // Static
+    GOLD, // Static
+    ITEMBUY_COST, // Static
+    ITEMSELL_COST, // Static
     MAXHEALTH,
     MAXMANA,
-    LEVELUP_COST,
+    LEVELUP_COST, // Static
     ATTACKSPEED,
     BASICATTACKDAMAGE,
-    LEVEL
+    LEVEL // Static
 }
 
 #endregion
