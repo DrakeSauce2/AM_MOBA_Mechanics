@@ -12,9 +12,16 @@ public class Item : ScriptableObject
 
     [SerializeField] private Stats itemStats;
 
+    public Stats GetItemStats() { return itemStats; }
+
     public void Init(GameObject owner)
     {
         Owner = owner;
+    }
+
+    public void RemoveItem()
+    {
+        Destroy(this);
     }
 
     public virtual void Update()
@@ -22,13 +29,4 @@ public class Item : ScriptableObject
         // Updates Aura Items and Active Items
     }
 
-    public void ApplyStats(Stats ownerStats)
-    {
-        ownerStats.TryAddStatValue(itemStats);
-    }
-
-    public void RemoveStats(Stats ownerStats)
-    {
-        ownerStats.TryRemoveStatValue(itemStats);
-    }
 }
