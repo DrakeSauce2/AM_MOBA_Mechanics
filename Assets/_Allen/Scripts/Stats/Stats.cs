@@ -33,16 +33,22 @@ public class Stats : ScriptableObject
     {
         foreach(StatInfo statToAdd in stats.StatsList)
         {
-            if (CheckIsStaticStat(statToAdd.statType)) break;
+            if (CheckIsStaticStat(statToAdd.statType))
+            {
+                Debug.Log($"Trying To Add Static Stat: {statToAdd.statType}!");
+                continue;
+            }
 
             if (statsDictionary.ContainsKey(statToAdd.statType))
             {
                 statsDictionary[statToAdd.statType] += statToAdd.statValue;
                 onValueChanged?.Invoke(statToAdd.statType, statsDictionary[statToAdd.statType]);
+                continue;
             }
             else
             {
                 Debug.LogError($"Error Trying To Set {statToAdd.statType} Stat; Stat Does Not Exist On This Object!");
+                continue;
             }
         }
     }

@@ -6,7 +6,7 @@ public class InventoryComponent : MonoBehaviour
 {
     private Stats ownerStats;
 
-    private List<Item> inventorySlots = new List<Item>();
+    [SerializeField] private List<Item> inventorySlots = new List<Item>();
 
     public void Init(Stats ownerStats)
     {
@@ -19,6 +19,7 @@ public class InventoryComponent : MonoBehaviour
         if (IsFull()) return;
 
         inventorySlots.Add(itemToAdd);
+        Debug.Log(ownerStats);
         ownerStats.TryAddStatValue(itemToAdd.GetItemStats());
     }
 
@@ -43,7 +44,7 @@ public class InventoryComponent : MonoBehaviour
 
     public bool IsFull()
     {
-        return inventorySlots.Count < 6;
+        return inventorySlots.Count >= 6;
     }
 
 }

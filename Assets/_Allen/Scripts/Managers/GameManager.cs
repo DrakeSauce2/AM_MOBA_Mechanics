@@ -98,6 +98,8 @@ public class PlayerInfo
             ExpGauge.SetValue(value);
             return;
         }
+
+        playerStatsUI.SetValues(ownerStats);
     }
 
     private ValueGauge CreateValueGauge(RectTransform transform)

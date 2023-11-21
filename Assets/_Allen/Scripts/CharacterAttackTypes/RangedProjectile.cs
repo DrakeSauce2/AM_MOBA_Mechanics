@@ -58,6 +58,8 @@ public class RangedProjectile : MonoBehaviour
 
         Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
         Debug.Log($"{hitCharacter} Found! Applying Damage");
+
+        UIManager.Instance.CreateDamagePopUp(other.gameObject.transform, damage);
         hitCharacter.ApplyDamage(Owner, damage);
     }
 

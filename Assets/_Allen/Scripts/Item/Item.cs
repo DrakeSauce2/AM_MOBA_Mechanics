@@ -8,7 +8,8 @@ public class Item : ScriptableObject
 {
     public GameObject Owner { get; private set; }
 
-    [SerializeField] private Image itemImage;
+    [SerializeField] private Sprite itemIcon;
+    public Sprite ItemIcon { get { return itemIcon; } }
 
     [SerializeField] private Stats itemStats;
 

@@ -16,7 +16,7 @@ public abstract class BasicAttack : ScriptableObject
         Owner = owner;
     }
 
-    public virtual void Attack()
+    public virtual void Attack(float damage)
     {
 
     }

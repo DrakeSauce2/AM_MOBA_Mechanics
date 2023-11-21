@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -9,8 +10,12 @@ public class UIManager : MonoBehaviour
     [Header("UI Prefabs")]
     [SerializeField] private GameObject playerHUDbar;
     [SerializeField] private GameObject playerStatsUI;
+    [SerializeField] private GameObject shopPrefab;
+    [SerializeField] private TextMeshProUGUI damagePopUp;
     public GameObject PlayerStatsUI { get { return playerStatsUI; } }
     public GameObject PlayerHUDbar { get { return playerHUDbar; } }
+    public GameObject ShopPrefab { get {  return shopPrefab; } }
+    public TextMeshProUGUI DamagePopUp { get {  return damagePopUp; } }
 
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerHealthGaugeTransform;
@@ -19,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform playerBuffIconsTransform;
     [SerializeField] private RectTransform playerDebuffIconsTransform;
 
+    public Transform CanvasTransform { get; private set; }
     public RectTransform PlayerHealthGaugeTransform { get { return playerHealthGaugeTransform; }  }
     public RectTransform PlayerManaGaugeTransform { get { return playerManaGaugeTransform; } }
     public RectTransform PlayerExpGaugeTransform { get { return playerExpGaugeTransform; } }
@@ -30,11 +36,23 @@ public class UIManager : MonoBehaviour
         if(Instance == null) Instance = this;
         else Destroy(Instance);
 
+        CanvasTransform = FindAnyObjectByType<Canvas>().transform;
     }
 
     public GameObject CreateValueGauge(RectTransform transform)
     {
         return Instantiate(GameManager.Instance.ValueBarPrefab, transform);
+    }
+
+    public void CreateDamagePopUp(Transform targetTransform, float damage)
+    {
+        TextMeshProUGUI instancedDamagePopUp = Instantiate(damagePopUp, CanvasTransform);
+        instancedDamagePopUp.text = damage.ToString();
+
+        UIAttachComponent uiAttachComp = instancedDamagePopUp.gameObject.AddComponent<UIAttachComponent>();
+        uiAttachComp.Init(uiAttachComp.GetRandomPosition(targetTransform.position, 1, 1));
+
+        Destroy(instancedDamagePopUp.gameObject, 1f);
     }
 
 }

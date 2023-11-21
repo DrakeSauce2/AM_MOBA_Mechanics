@@ -10,12 +10,13 @@ public class PlayerCharacter : Character
     private PlayerInputSystem playerInputActions;
     private PlayerInfo playerInfo;
 
-    Vector2 animInput = Vector2.zero;
-    Vector2 refVel = Vector2.zero;
-
     [SerializeField] private PassiveAbility passiveAbility;
     [SerializeField] private List<ActiveAbility> activeAbilities = new List<ActiveAbility>(4);
 
+    public InventoryComponent inventoryComponent { get; private set; }
+
+    Vector2 animInput = Vector2.zero;
+    Vector2 refVel = Vector2.zero;
     bool isInitialized = false;
     bool attack = false;
 
@@ -24,10 +25,13 @@ public class PlayerCharacter : Character
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
+        inventoryComponent = gameObject.AddComponent<InventoryComponent>();
+
         BaseInitialize(this);
         InitializeInputSystem();
 
         SetBasicAttack(gameObject);
+        inventoryComponent.Init(GetStats());
 
         isInitialized = true;
     }
@@ -108,7 +112,7 @@ public class PlayerCharacter : Character
 
     private void Attack()
     {
-        BasicAttackType.Attack();
+        BasicAttackType.Attack(GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE) + (GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE) * 0.7f));
     }
 
     private void ResetAttack()
@@ -116,11 +120,6 @@ public class PlayerCharacter : Character
         animator.ResetTrigger("BasicAttack");
 
         attack = false;
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
