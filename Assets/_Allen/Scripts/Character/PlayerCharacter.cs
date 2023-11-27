@@ -10,9 +10,7 @@ public class PlayerCharacter : Character
     private PlayerInputSystem playerInputActions;
     private PlayerInfo playerInfo;
 
-    [Header("Abilities")]
-    [SerializeField] private PassiveAbility passiveAbility;
-    [SerializeField] private List<ActiveAbility> activeAbilities = new List<ActiveAbility>(4);
+
 
     public InventoryComponent inventoryComponent { get; private set; }
 
@@ -41,10 +39,7 @@ public class PlayerCharacter : Character
     {
         this.playerInfo = playerInfo;
 
-        for (int i = 0; i < activeAbilities.Count; i++)
-        {
-            activeAbilities[i].Init(gameObject, playerInfo._HUDbar.AbilitySlotList[i]);
-        }
+        
 
         playerInfo._HUDbar.SetCharacteIcon(CharacterSpriteIcon);
     }
@@ -69,30 +64,32 @@ public class PlayerCharacter : Character
 
     private void CancelAbility(InputAction.CallbackContext context)
     {
+        /*
         foreach (ActiveAbility ability in activeAbilities)
         {
             ability.StopCast();
         }
+        */
     }
 
     private void StartCastAbility_1(InputAction.CallbackContext context)
     {
-        activeAbilities[0].Cast(animator, 0);
+        //activeAbilities[0].Cast(animator, 0);
     }
 
     private void StartCastAbility_2(InputAction.CallbackContext context)
     {
-        activeAbilities[1].Cast(animator, 1);
+        //activeAbilities[1].Cast(animator, 1);
     }
 
     private void StartCastAbility_3(InputAction.CallbackContext context)
     {
-        activeAbilities[2].Cast(animator, 2);
+        //activeAbilities[2].Cast(animator, 2);
     }
 
     private void StartCastAbility_4(InputAction.CallbackContext context)
     {
-        activeAbilities[3].Cast(animator, 3);
+        //activeAbilities[3].Cast(animator, 3);
     }
 
     #endregion
