@@ -10,6 +10,7 @@ public class PlayerCharacter : Character
     private PlayerInputSystem playerInputActions;
     private PlayerInfo playerInfo;
 
+    [Header("Abilities")]
     [SerializeField] private PassiveAbility passiveAbility;
     [SerializeField] private List<ActiveAbility> activeAbilities = new List<ActiveAbility>(4);
 
@@ -112,7 +113,9 @@ public class PlayerCharacter : Character
 
     private void Attack()
     {
-        BasicAttackType.Attack(GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE) + (GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE) * 0.7f));
+        BasicAttackType.Attack(GetStats().TryGetStatValue(Stat.BASICATTACKDAMAGE) + 
+                              (GetStats().TryGetStatValue(Stat.PHYSICAL_POWER)    * GetStats().TryGetStatValue(Stat.PHYSICAL_POWER_SCALE)) + 
+                              (GetStats().TryGetStatValue(Stat.MAGICAL_POWER)     * GetStats().TryGetStatValue(Stat.MAGICAL_POWER_SCALE)));
     }
 
     private void ResetAttack()

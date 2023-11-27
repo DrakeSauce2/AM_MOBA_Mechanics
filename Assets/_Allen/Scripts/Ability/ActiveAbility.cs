@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static ActiveAbility;
 
 public enum CastingState
 {
@@ -25,6 +25,7 @@ public class ActiveAbility : ScriptableObject
     private AbilitySlot slot;
     [Space]
     [SerializeField] private float cooldown;
+    float currentCooldown = 0;
 
     [Header("Ability Outline")]
     [SerializeField] private GameObject abilityOutlinePrefab;
@@ -54,7 +55,7 @@ public class ActiveAbility : ScriptableObject
 
     public void Cast(Animator characterAnimator, int abilityIndex)
     {
-        if (slot.cooldown < cooldown) return;
+        if (currentCooldown > 0) return;
 
         switch (castingState)
         {
@@ -69,31 +70,59 @@ public class ActiveAbility : ScriptableObject
 
                 return;
         }
+
+        castingState++;
     }
 
     public void StopCast()
     {
         instancedAbilityOutline.SetActive(false);
-        castingState = CastingState.NONE;
     }
 
     private void StartAbility()
     {
-        
-        castingState = CastingState.STARTCAST;
         instancedAbilityOutline.SetActive(true);
     }
 
     private void EndAbility()
     {
         onAbilityEnd?.Invoke();
+
+
     }
 
     protected virtual void UseAbility()
     {   
         onAbilityStart?.Invoke();  
-        slot.StartCooldown(cooldown);
+        
         instancedAbilityOutline.SetActive(true);
+        //StartCooldown();
+
+        EndAbility();
     }
+
+    ///
+    /// TODO : | Create AbilityComponent Class To Handle Ability Coroutines |
+    ///        v                                                            v
+
+    /*
+    void StartCooldown()
+    {
+        StartCoroutine(CooldownCoroutine());
+    }
+
+    public Coroutine StartCoroutine(IEnumerator enumerator)
+    {
+        return OwningAblityComponet.StartCoroutine(enumerator);
+    }
+
+    IEnumerator CooldownCoroutine()
+    {
+        onCooldown = true;
+        onCooldownStarted?.Invoke(cooldownDuration);
+        yield return new WaitForSeconds(cooldownDuration);
+        onCooldown = false;
+    }
+    */
 
 }

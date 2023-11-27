@@ -128,6 +128,8 @@ public class Stats : ScriptableObject
             case Stat.ITEMBUY_COST:
             case Stat.GOLD:
             case Stat.EXPERIENCE:
+            case Stat.PHYSICAL_POWER_SCALE:
+            case Stat.MAGICAL_POWER_SCALE:
                 return true;
         }
 
@@ -166,7 +168,9 @@ public enum Stat
     LEVELUP_COST, // Static
     ATTACKSPEED,
     BASICATTACKDAMAGE,
-    LEVEL // Static
+    LEVEL, // Static
+    PHYSICAL_POWER_SCALE, // Static
+    MAGICAL_POWER_SCALE // Static
 }
 
 #endregion

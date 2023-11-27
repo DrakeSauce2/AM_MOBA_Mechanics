@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     public void CreateDamagePopUp(Transform targetTransform, float damage)
     {
         TextMeshProUGUI instancedDamagePopUp = Instantiate(damagePopUp, CanvasTransform);
-        instancedDamagePopUp.text = damage.ToString();
+        instancedDamagePopUp.text = damage.ToString("F0");
 
         UIAttachComponent uiAttachComp = instancedDamagePopUp.gameObject.AddComponent<UIAttachComponent>();
         uiAttachComp.Init(uiAttachComp.GetRandomPosition(targetTransform.position, 1, 1));

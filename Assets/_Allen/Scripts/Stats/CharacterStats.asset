@@ -173,3 +173,11 @@ MonoBehaviour:
     statValue: 2
     incrementValues: []
     incrementIndexValue: 0
+  - statType: 17
+    statValue: 0.7
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 18
+    statValue: 0.1
+    incrementValues: []
+    incrementIndexValue: 0

@@ -22,6 +22,6 @@ public class ValueGauge : MonoBehaviour
     public void SetValue(float val)
     {
         slider.value = val;
-        valueText.text = $"{val} / {slider.maxValue}";
+        valueText.text = $"{val.ToString("F0")} / {slider.maxValue.ToString("F0")}";
     }
 }

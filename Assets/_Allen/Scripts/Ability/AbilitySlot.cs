@@ -12,17 +12,11 @@ public class AbilitySlot : MonoBehaviour
     [SerializeField] Image abilityCooldownFill;
     [SerializeField] List<GameObject> levelCount = new List<GameObject>();
 
-    float maxCooldown;
-    public float cooldown { get; private set; }
-    bool onCooldown = false;
-
     public void Init(Sprite imageSprite)
     {
         abilityImage.sprite = imageSprite;
         cooldownTimeText.text = $"";
         abilityCooldownFill.fillAmount = 0;
-
-        cooldown = 9999f;
         /*
         foreach (GameObject level in levelCount)
         {
@@ -31,34 +25,12 @@ public class AbilitySlot : MonoBehaviour
         */
     }
 
-    private void Update()
+    public void SetCooldownTime(float cooldownTime, float maxCooldown)
     {
-        if (!onCooldown) { return; }
+        abilityCooldownFill.fillAmount = 1 - (cooldownTime / maxCooldown);
+        cooldownTimeText.text = (maxCooldown - cooldownTime).ToString("F0");
 
-        cooldown += Time.deltaTime;
-        abilityCooldownFill.fillAmount = 1 - (cooldown / maxCooldown);
-        cooldownTimeText.text = (maxCooldown - cooldown).ToString("F0");
-
-        if (abilityCooldownFill.fillAmount > 0)
-        {
-            abilityCooldownFill.gameObject.SetActive(true);
-            
-        }
-        else
-        {
-            abilityCooldownFill.gameObject.SetActive(false);
-            onCooldown = false;
-        }       
-
-    }
-
-    public void StartCooldown(float maxCooldown)
-    {
-        if (onCooldown) return;
-
-        onCooldown = true;
-        this.maxCooldown = maxCooldown;
-        cooldown = 0;
+        abilityCooldownFill.gameObject.SetActive(abilityCooldownFill.fillAmount > 0);
     }
 
 }
