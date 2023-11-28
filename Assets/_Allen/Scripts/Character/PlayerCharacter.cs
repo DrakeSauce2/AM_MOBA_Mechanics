@@ -10,7 +10,8 @@ public class PlayerCharacter : Character
     private PlayerInputSystem playerInputActions;
     private PlayerInfo playerInfo;
 
-
+    [Header("Shop Component")]
+    [SerializeField] ShopComponent shopComponent;
 
     public InventoryComponent inventoryComponent { get; private set; }
 
@@ -18,6 +19,7 @@ public class PlayerCharacter : Character
     Vector2 refVel = Vector2.zero;
     bool isInitialized = false;
     bool attack = false;
+
 
     public void Initialize()
     {
@@ -41,7 +43,7 @@ public class PlayerCharacter : Character
 
         
 
-        playerInfo._HUDbar.SetCharacteIcon(CharacterSpriteIcon);
+        playerInfo._HUDbar.SetCharacterIcon(CharacterSpriteIcon);
     }
 
     private void InitializeInputSystem()
@@ -57,7 +59,14 @@ public class PlayerCharacter : Character
         playerInputActions.MnK.Ability3.performed += StartCastAbility_3;
         playerInputActions.MnK.Ability4.performed += StartCastAbility_4;
 
+        playerInputActions.MnK.Shop.performed += Shop;
+
         playerInputActions.MnK.BasicAttack.performed += Look;
+    }
+
+    private void Shop(InputAction.CallbackContext context)
+    {
+        shopComponent.ToggleShop();
     }
 
     #region Abilities

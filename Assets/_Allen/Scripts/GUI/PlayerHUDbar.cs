@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class PlayerHUDbar : MonoBehaviour
     public ValueGauge ExpGauge { get { return expGauge; } }
     public List<AbilitySlot> AbilitySlotList { get { return abilitySlotList; } }
 
-    public void SetCharacteIcon(Sprite characterSprite)
+    public void SetCharacterIcon(Sprite characterSprite)
     {
         characterImage.sprite = characterSprite;
     }

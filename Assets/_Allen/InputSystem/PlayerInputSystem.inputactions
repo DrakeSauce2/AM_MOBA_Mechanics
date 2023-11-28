@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "StopAbility",
+                    "type": "Button",
+                    "id": "4949943e-ab32-4987-bdcd-9467d2d329a0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Ability1",
                     "type": "Button",
                     "id": "fb6489f0-e93f-4185-bfe9-34d305b77862",
@@ -69,9 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StopAbility",
+                    "name": "Shop",
                     "type": "Button",
-                    "id": "4949943e-ab32-4987-bdcd-9467d2d329a0",
+                    "id": "d7bdf027-4de5-41a4-a9f6-21d16d48a75d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -329,6 +338,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "StopAbility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27f55658-3bb8-4813-84a6-f9c4aa93d053",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

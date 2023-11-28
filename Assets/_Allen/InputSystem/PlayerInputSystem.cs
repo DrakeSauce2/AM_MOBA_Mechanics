@@ -55,6 +55,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""StopAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""4949943e-ab32-4987-bdcd-9467d2d329a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Ability1"",
                     ""type"": ""Button"",
                     ""id"": ""fb6489f0-e93f-4185-bfe9-34d305b77862"",
@@ -91,9 +100,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StopAbility"",
+                    ""name"": ""Shop"",
                     ""type"": ""Button"",
-                    ""id"": ""4949943e-ab32-4987-bdcd-9467d2d329a0"",
+                    ""id"": ""d7bdf027-4de5-41a4-a9f6-21d16d48a75d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -353,6 +362,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""StopAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27f55658-3bb8-4813-84a6-f9c4aa93d053"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -392,11 +412,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_MnK_WASD = m_MnK.FindAction("WASD", throwIfNotFound: true);
         m_MnK_Look = m_MnK.FindAction("Look", throwIfNotFound: true);
         m_MnK_BasicAttack = m_MnK.FindAction("BasicAttack", throwIfNotFound: true);
+        m_MnK_StopAbility = m_MnK.FindAction("StopAbility", throwIfNotFound: true);
         m_MnK_Ability1 = m_MnK.FindAction("Ability1", throwIfNotFound: true);
         m_MnK_Ability2 = m_MnK.FindAction("Ability2", throwIfNotFound: true);
         m_MnK_Ability3 = m_MnK.FindAction("Ability3", throwIfNotFound: true);
         m_MnK_Ability4 = m_MnK.FindAction("Ability4", throwIfNotFound: true);
-        m_MnK_StopAbility = m_MnK.FindAction("StopAbility", throwIfNotFound: true);
+        m_MnK_Shop = m_MnK.FindAction("Shop", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Newaction = m_Controller.FindAction("New action", throwIfNotFound: true);
@@ -464,11 +485,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_MnK_WASD;
     private readonly InputAction m_MnK_Look;
     private readonly InputAction m_MnK_BasicAttack;
+    private readonly InputAction m_MnK_StopAbility;
     private readonly InputAction m_MnK_Ability1;
     private readonly InputAction m_MnK_Ability2;
     private readonly InputAction m_MnK_Ability3;
     private readonly InputAction m_MnK_Ability4;
-    private readonly InputAction m_MnK_StopAbility;
+    private readonly InputAction m_MnK_Shop;
     public struct MnKActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -476,11 +498,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @WASD => m_Wrapper.m_MnK_WASD;
         public InputAction @Look => m_Wrapper.m_MnK_Look;
         public InputAction @BasicAttack => m_Wrapper.m_MnK_BasicAttack;
+        public InputAction @StopAbility => m_Wrapper.m_MnK_StopAbility;
         public InputAction @Ability1 => m_Wrapper.m_MnK_Ability1;
         public InputAction @Ability2 => m_Wrapper.m_MnK_Ability2;
         public InputAction @Ability3 => m_Wrapper.m_MnK_Ability3;
         public InputAction @Ability4 => m_Wrapper.m_MnK_Ability4;
-        public InputAction @StopAbility => m_Wrapper.m_MnK_StopAbility;
+        public InputAction @Shop => m_Wrapper.m_MnK_Shop;
         public InputActionMap Get() { return m_Wrapper.m_MnK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -499,6 +522,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @BasicAttack.started += instance.OnBasicAttack;
             @BasicAttack.performed += instance.OnBasicAttack;
             @BasicAttack.canceled += instance.OnBasicAttack;
+            @StopAbility.started += instance.OnStopAbility;
+            @StopAbility.performed += instance.OnStopAbility;
+            @StopAbility.canceled += instance.OnStopAbility;
             @Ability1.started += instance.OnAbility1;
             @Ability1.performed += instance.OnAbility1;
             @Ability1.canceled += instance.OnAbility1;
@@ -511,9 +537,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Ability4.started += instance.OnAbility4;
             @Ability4.performed += instance.OnAbility4;
             @Ability4.canceled += instance.OnAbility4;
-            @StopAbility.started += instance.OnStopAbility;
-            @StopAbility.performed += instance.OnStopAbility;
-            @StopAbility.canceled += instance.OnStopAbility;
+            @Shop.started += instance.OnShop;
+            @Shop.performed += instance.OnShop;
+            @Shop.canceled += instance.OnShop;
         }
 
         private void UnregisterCallbacks(IMnKActions instance)
@@ -527,6 +553,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @BasicAttack.started -= instance.OnBasicAttack;
             @BasicAttack.performed -= instance.OnBasicAttack;
             @BasicAttack.canceled -= instance.OnBasicAttack;
+            @StopAbility.started -= instance.OnStopAbility;
+            @StopAbility.performed -= instance.OnStopAbility;
+            @StopAbility.canceled -= instance.OnStopAbility;
             @Ability1.started -= instance.OnAbility1;
             @Ability1.performed -= instance.OnAbility1;
             @Ability1.canceled -= instance.OnAbility1;
@@ -539,9 +568,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Ability4.started -= instance.OnAbility4;
             @Ability4.performed -= instance.OnAbility4;
             @Ability4.canceled -= instance.OnAbility4;
-            @StopAbility.started -= instance.OnStopAbility;
-            @StopAbility.performed -= instance.OnStopAbility;
-            @StopAbility.canceled -= instance.OnStopAbility;
+            @Shop.started -= instance.OnShop;
+            @Shop.performed -= instance.OnShop;
+            @Shop.canceled -= instance.OnShop;
         }
 
         public void RemoveCallbacks(IMnKActions instance)
@@ -610,11 +639,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnWASD(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnBasicAttack(InputAction.CallbackContext context);
+        void OnStopAbility(InputAction.CallbackContext context);
         void OnAbility1(InputAction.CallbackContext context);
         void OnAbility2(InputAction.CallbackContext context);
         void OnAbility3(InputAction.CallbackContext context);
         void OnAbility4(InputAction.CallbackContext context);
-        void OnStopAbility(InputAction.CallbackContext context);
+        void OnShop(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {
