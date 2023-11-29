@@ -11,13 +11,29 @@ public class ShopItem : MonoBehaviour
 
     Button button;
 
+    private bool isPurchased = false;
+
     private void Awake()
     {
         itemImage.sprite = item.ItemIcon;
 
-        button.onClick.AddListener(() => UIManager.Instance.ShopPrefab.GetComponent<ShopComponent>().BuyItem(item));
+        button.onClick.AddListener(() => BuyItem());
     }
     
+    private void BuyItem()
+    {
+        SetPurchased(true);
+        UIManager.Instance.ShopPrefab.GetComponent<ShopComponent>().BuyItem(item);
+    }
 
+    public void SetPurchased(bool state)
+    {
+        isPurchased = state;
+    }
+
+    public bool IsPurchased()
+    {
+        return isPurchased;
+    }
 
 }

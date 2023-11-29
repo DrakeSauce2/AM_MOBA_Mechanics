@@ -11,11 +11,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject playerHUDbar;
     [SerializeField] private GameObject playerStatsUI;
     [SerializeField] private GameObject shopPrefab;
+    [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private TextMeshProUGUI damagePopUp;
     public GameObject PlayerStatsUI { get { return playerStatsUI; } }
     public GameObject PlayerHUDbar { get { return playerHUDbar; } }
     public GameObject ShopPrefab { get {  return shopPrefab; } }
     public TextMeshProUGUI DamagePopUp { get {  return damagePopUp; } }
+    public GameObject ItemSlotPrefab { get { return itemSlotPrefab; } }
 
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerHealthGaugeTransform;
@@ -23,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform playerExpGaugeTransform;
     [SerializeField] private RectTransform playerBuffIconsTransform;
     [SerializeField] private RectTransform playerDebuffIconsTransform;
+    [SerializeField] private RectTransform shopTreeTransform;
 
     public Transform CanvasTransform { get; private set; }
     public RectTransform PlayerHealthGaugeTransform { get { return playerHealthGaugeTransform; }  }
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
     public RectTransform PlayerExpGaugeTransform { get { return playerExpGaugeTransform; } }
     public RectTransform PlayerBuffIconsTransform { get { return playerBuffIconsTransform; } }
     public RectTransform PlayerDebuffIconsTransform { get { return playerDebuffIconsTransform; } }
+    public RectTransform ShopTreeTransform { get { return shopTreeTransform; } }
 
     private void Awake()
     {

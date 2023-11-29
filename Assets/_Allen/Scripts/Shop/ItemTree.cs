@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class ItemTree : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private ItemNode root;
+
+    private Vector2 rootPosition;
+
+    private void Start()
     {
-        
+        rootPosition = UIManager.Instance.ShopTreeTransform.position;
+
+        ConstructTree();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ConstructTree()
     {
-        
+        root.Init(null, rootPosition);
+    }
+
+    public void DeconstructTree()
+    {
+        root.Deconstruct();
     }
 }
