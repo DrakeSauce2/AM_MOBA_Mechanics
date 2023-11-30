@@ -12,12 +12,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject playerStatsUI;
     [SerializeField] private GameObject shopPrefab;
     [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private GameObject itemLinePrefab;
     [SerializeField] private TextMeshProUGUI damagePopUp;
     public GameObject PlayerStatsUI { get { return playerStatsUI; } }
     public GameObject PlayerHUDbar { get { return playerHUDbar; } }
     public GameObject ShopPrefab { get {  return shopPrefab; } }
     public TextMeshProUGUI DamagePopUp { get {  return damagePopUp; } }
     public GameObject ItemSlotPrefab { get { return itemSlotPrefab; } }
+    public GameObject ItemLinePrefab { get { return itemLinePrefab; } }
 
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerHealthGaugeTransform;
