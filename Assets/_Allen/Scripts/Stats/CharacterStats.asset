@@ -134,7 +134,7 @@ MonoBehaviour:
     - 0
     incrementIndexValue: 0
   - statType: 8
-    statValue: 5
+    statValue: 1500
     incrementValues: []
     incrementIndexValue: 0
   - statType: 7

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "ItemNode/ItemNode")]
 public class ItemNode : ScriptableObject
@@ -15,6 +15,8 @@ public class ItemNode : ScriptableObject
 
     private GameObject slotPrefab = null;
     private ShopItem shopItem = null;
+
+    private List<GameObject> lines = new List<GameObject>();
 
     public void Init(ItemNode parent, Vector2 position)
     {
@@ -30,15 +32,21 @@ public class ItemNode : ScriptableObject
         slotPrefab = Instantiate(UIManager.Instance.ItemSlotPrefab, iconPosition, 
                                  Quaternion.identity, UIManager.Instance.ShopTreeTransform);
 
-        shopItem = slotPrefab.GetComponent<ShopItem>(); 
+        if(item != null)
+            slotPrefab.GetComponent<Image>().sprite = item.ItemIcon;
+
+        shopItem = slotPrefab.GetComponent<ShopItem>();
+        shopItem.Init(item);
         slotPrefab.name = name;
     }
 
     public void CreateNodes(Vector2 position)
     {
-        CreateIcon(position);
-
-        if (children.Count == 0) return;
+        if (children.Count == 0)
+        {
+            CreateIcon(position);
+            return;
+        }
 
         float xPos = ((children.Count + 1) / 2) - 35f;
         for (int i = 0; i < children.Count; i++)
@@ -53,32 +61,22 @@ public class ItemNode : ScriptableObject
             Vector2 newPos = new Vector2(position.x + (positionStep), position.y + 75);
             children[i].Init(this, newPos);
 
-            CreateLines(position, positionStep, i);
+            MakeLines(position, newPos, 7.5f);
         }
+
+        CreateIcon(position);
     }
 
-    private void CreateLines(Vector2 position, float step, int index)
+    private void MakeLines(Vector3 startPosition, Vector3 endPosition, float lineThickness)
     {
-        Vector3 lineDir = Vector3.zero;
-        Vector3 lineScale = Vector3.one;
-        Vector3 linePos = Vector3.zero;
+        GameObject line = new GameObject("Shop Line");
+        line.AddComponent<CanvasRenderer>();
+        line.AddComponent<RectTransform>();
+        line.transform.SetParent(UIManager.Instance.ShopTreeTransform);
+        ShopItemLine itemLine = line.AddComponent<ShopItemLine>();
+        itemLine.Init(startPosition, endPosition, lineThickness);
 
-        if (IsRoot())
-        {
-            linePos = new Vector3(position.x - 50 * Mathf.Pow(-1, index + 1), position.y, 0);
-            lineDir = new Vector3(0, 0, 35 * Mathf.Pow(-1, index + 1));
-            lineScale = new Vector3(1, 1.25f, 1);
-        }
-        else if (children.Count != 1)
-        {
-            linePos = new Vector3(position.x, position.y, 0);
-            lineDir = new Vector3(0, 0, -25 * Mathf.Pow(-1, index + 1));
-        }
-
-        GameObject itemLine = Instantiate(UIManager.Instance.ItemLinePrefab, linePos, Quaternion.identity, UIManager.Instance.ShopTreeTransform);
-        itemLine.transform.localScale = lineScale;
-        itemLine.transform.Rotate(lineDir);
-
+        lines.Add(line);
     }
 
     public bool IsRoot()
@@ -98,6 +96,12 @@ public class ItemNode : ScriptableObject
         {
             node.Deconstruct();
             Destroy(slotPrefab);
+        }
+
+        foreach (GameObject line in lines)
+        {
+            Destroy(line);
+            lines.Remove(line);
         }
 
         slotPrefab = null;

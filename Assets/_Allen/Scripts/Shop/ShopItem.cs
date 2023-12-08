@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-    [SerializeField] private Item item;
-    [Header("Graphic")]
-    [SerializeField] private Image itemImage;
+    public Item item { get; private set; }
 
     Button button;
 
     private bool isPurchased = false;
 
-    private void Awake()
+    public void Init(Item item)
     {
-        itemImage.sprite = item.ItemIcon;
+        if (item == null) return;
+        this.item = item;
+        this.item.Init();
 
-        button.onClick.AddListener(() => BuyItem());
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => SelectShopItem());
     }
     
-    private void BuyItem()
+    public void SelectShopItem()
     {
-        SetPurchased(true);
-        UIManager.Instance.ShopPrefab.GetComponent<ShopComponent>().BuyItem(item);
+        UIManager.Instance.ShopPrefab.GetComponent<ShopComponent>().SelectShopItem(this);
+        Debug.Log($"Selecting Item: {this}");
     }
 
     public void SetPurchased(bool state)

@@ -53,6 +53,27 @@ public class Stats : ScriptableObject
         }
     }
 
+    public void TryAddStatValue(Stat stat, float value)
+    {
+        if (CheckIsStaticStat(stat))
+        {
+            Debug.Log($"Trying To Add Static Stat: {stat}!");
+            return;
+        }
+
+        if (statsDictionary.ContainsKey(stat))
+        {
+            statsDictionary[stat] += value;
+            onValueChanged?.Invoke(stat, value);
+            return;
+        }
+        else
+        {
+            Debug.LogError($"Error Trying To Set {stat} Stat; Stat Does Not Exist On This Object!");
+            return;
+        }
+    }
+
     public void TryRemoveStatValue(Stats stats)
     {
         foreach (StatInfo statToAdd in stats.StatsList)

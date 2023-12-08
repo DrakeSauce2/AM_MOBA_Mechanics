@@ -102,7 +102,7 @@ public class PlayerInfo
         playerStatsUI.SetValues(ownerStats);
     }
 
-    private ValueGauge CreateValueGauge(RectTransform transform)
+    private ValueGauge CreateValueGauge(Transform transform)
     {
         GameObject valueGuageInstance = UIManager.Instance.CreateValueGauge(transform);
         return valueGuageInstance.GetComponent<ValueGauge>();

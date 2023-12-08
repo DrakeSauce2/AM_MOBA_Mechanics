@@ -14,8 +14,6 @@ public class RangedProjectile : MonoBehaviour
     float distanceTravelled = 0f;
     float maxDistance = 1f;
 
-    bool isInitialized = false;
-
     public void Init(GameObject owner, float projectileSpeed, float maxDistance, float damage)
     {
         Owner = owner;
@@ -27,14 +25,10 @@ public class RangedProjectile : MonoBehaviour
         rBody = GetComponent<Rigidbody>();
 
         rBody.AddForce(transform.forward * projectileSpeed * Time.fixedDeltaTime, ForceMode.Impulse);
-
-        isInitialized = true;
     }
 
     private void FixedUpdate()
     {
-       // if (isInitialized == false) return;
- 
         distanceTravelled = Vector3.Distance(startPos, transform.position);
 
         if (distanceTravelled >= maxDistance)

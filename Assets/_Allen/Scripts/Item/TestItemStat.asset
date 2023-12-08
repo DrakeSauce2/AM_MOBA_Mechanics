@@ -25,3 +25,11 @@ MonoBehaviour:
     statValue: 80
     incrementValues: []
     incrementIndexValue: 0
+  - statType: 9
+    statValue: 1000
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 10
+    statValue: 750
+    incrementValues: []
+    incrementIndexValue: 0

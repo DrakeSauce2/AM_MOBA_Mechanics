@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public enum MinionType
@@ -36,12 +33,12 @@ public class Minion : Character
 
     private bool isInitialized = false;
 
-    private void Awake()
+    private void Start()
     {
         Init();
         _UIManager = UIManager.Instance;
 
-        healthGauge = CreateValueGauge(FindAnyObjectByType<Canvas>().GetComponent<RectTransform>());
+        healthGauge = CreateValueGauge(_UIManager.CanvasTransform);
         healthGauge.Initialize(GetStats().TryGetStatValue(Stat.HEALTH), GetStats().TryGetStatValue(Stat.MAXHEALTH), Color.red);
         UIAttachComponent attachComponent = healthGauge.gameObject.AddComponent<UIAttachComponent>();
         attachComponent.Init(healthAttachPoint);
@@ -50,7 +47,7 @@ public class Minion : Character
         minionStats.onValueChanged += UpdateHealthBar;
     }
 
-    private ValueGauge CreateValueGauge(RectTransform transform)
+    private ValueGauge CreateValueGauge(Transform transform)
     {
         GameObject valueGuageInstance = UIManager.Instance.CreateValueGauge(transform);
         return valueGuageInstance.GetComponent<ValueGauge>();

@@ -7,6 +7,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("Canvas")]
+    [SerializeField] private Canvas canvasPrefab;
+    public Canvas CanvasPrefab { get { return canvasPrefab; } }
+
     [Header("UI Prefabs")]
     [SerializeField] private GameObject playerHUDbar;
     [SerializeField] private GameObject playerStatsUI;
@@ -14,12 +18,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private GameObject itemLinePrefab;
     [SerializeField] private TextMeshProUGUI damagePopUp;
+    [SerializeField] private SpriteRenderer lineSpriteRenderer;
+
     public GameObject PlayerStatsUI { get { return playerStatsUI; } }
     public GameObject PlayerHUDbar { get { return playerHUDbar; } }
     public GameObject ShopPrefab { get {  return shopPrefab; } }
     public TextMeshProUGUI DamagePopUp { get {  return damagePopUp; } }
     public GameObject ItemSlotPrefab { get { return itemSlotPrefab; } }
     public GameObject ItemLinePrefab { get { return itemLinePrefab; } }
+    public SpriteRenderer LineSpriteRenderer { get { return lineSpriteRenderer; } }
+
 
     [Header("UI Transforms")]
     [SerializeField] private RectTransform playerHealthGaugeTransform;
@@ -28,24 +36,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform playerBuffIconsTransform;
     [SerializeField] private RectTransform playerDebuffIconsTransform;
     [SerializeField] private RectTransform shopTreeTransform;
-
-    public Transform CanvasTransform { get; private set; }
+   
     public RectTransform PlayerHealthGaugeTransform { get { return playerHealthGaugeTransform; }  }
     public RectTransform PlayerManaGaugeTransform { get { return playerManaGaugeTransform; } }
     public RectTransform PlayerExpGaugeTransform { get { return playerExpGaugeTransform; } }
     public RectTransform PlayerBuffIconsTransform { get { return playerBuffIconsTransform; } }
     public RectTransform PlayerDebuffIconsTransform { get { return playerDebuffIconsTransform; } }
     public RectTransform ShopTreeTransform { get { return shopTreeTransform; } }
+    public Transform CanvasTransform { get; private set; }
 
     private void Awake()
     {
         if(Instance == null) Instance = this;
         else Destroy(Instance);
 
-        CanvasTransform = FindAnyObjectByType<Canvas>().transform;
+        CanvasTransform = canvasPrefab.transform;
     }
 
-    public GameObject CreateValueGauge(RectTransform transform)
+    public GameObject CreateValueGauge(Transform transform)
     {
         return Instantiate(GameManager.Instance.ValueBarPrefab, transform);
     }

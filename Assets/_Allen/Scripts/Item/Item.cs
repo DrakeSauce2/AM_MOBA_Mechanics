@@ -3,21 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemTiers
-{
-    RANK_1,
-    RANK_2,
-    RANK_3
-}
 
 [CreateAssetMenu(menuName = "Item/BaseItem")]
 public class Item : ScriptableObject
 {
     public GameObject Owner { get; private set; }
-
-    [Header("Item Tier")]
-    [SerializeField] private ItemTiers itemTier;
-    public ItemTiers ItemTier { get { return itemTier; } }
 
     [Header("Graphic")]
     [SerializeField] private Sprite itemIcon;
@@ -27,9 +17,21 @@ public class Item : ScriptableObject
     [SerializeField] private Stats itemStats;
     public Stats GetItemStats() { return itemStats; }
 
-    public void Init(GameObject owner)
+    [Header("Item Description")]
+    [SerializeField, TextArea] private string itemDescription;
+    public string ItemDescription { get { return itemDescription; } }
+
+    public float ItemBuyCost { get { return itemStats.TryGetStatValue(Stat.ITEMBUY_COST); } }
+    public float ItemSellCost { get { return itemStats.TryGetStatValue(Stat.ITEMSELL_COST); } }
+
+    public void SetOwner(GameObject owner)
     {
         Owner = owner;
+    }
+
+    public void Init()
+    {
+        itemStats.Initialize();
     }
 
     public void RemoveItem()
