@@ -4845,6 +4845,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8745673984344555237, guid: 893eafab76ff2e94090c0337fe35f65c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8821115910504621502, guid: 893eafab76ff2e94090c0337fe35f65c,
         type: 3}
       propertyPath: m_Layer
@@ -5287,6 +5292,11 @@ PrefabInstance:
       propertyPath: statUISlots.Array.data[10].statText
       value: 
       objectReference: {fileID: 650229044}
+    - target: {fileID: 8335299822393792654, guid: b599f941e7a54754a94c450f164f5835,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8335299822393792654, guid: b599f941e7a54754a94c450f164f5835,
         type: 3}
       propertyPath: m_fontSize

@@ -42,7 +42,7 @@ public class PlayerCharacter : Character
         statsPerSecond.Init(GetStats());
 
         abilityComponent = gameObject.GetComponent<AbilityComponent>();
-        abilityComponent.Init(this.gameObject);
+        abilityComponent.Init(this.gameObject, GetStats());
 
         isInitialized = true;
     }
@@ -91,28 +91,35 @@ public class PlayerCharacter : Character
 
     private void StartCastAbility_1(InputAction.CallbackContext context)
     {
-        Debug.Log(abilityComponent);
-        Debug.Log(abilityComponent.ActiveAbilities.Count);
-        abilityComponent.TryUseAbility(0);
-        animator.SetTrigger($"Ability1");
+        abilityComponent.TryUseAbility(animator, 0);
+        CancelOtherAbilities(abilityComponent.ActiveAbilities[0]);
     }
 
     private void StartCastAbility_2(InputAction.CallbackContext context)
     {
-        abilityComponent.TryUseAbility(1);
-        animator.SetTrigger($"Ability2");
+        abilityComponent.TryUseAbility(animator, 1);
+        CancelOtherAbilities(abilityComponent.ActiveAbilities[1]);
     }
 
     private void StartCastAbility_3(InputAction.CallbackContext context)
     {
-        abilityComponent.TryUseAbility(2);
-        animator.SetTrigger($"Ability3");
+        abilityComponent.TryUseAbility(animator, 2);
+        CancelOtherAbilities(abilityComponent.ActiveAbilities[2]);
     }
 
     private void StartCastAbility_4(InputAction.CallbackContext context)
     {
-        abilityComponent.TryUseAbility(3);
-        animator.SetTrigger($"Ability4");
+        abilityComponent.TryUseAbility(animator, 3);
+        CancelOtherAbilities(abilityComponent.ActiveAbilities[3]);
+    }
+
+    private void CancelOtherAbilities(ActiveAbility ability)
+    {
+        foreach (ActiveAbility abilityToCancel in abilityComponent.ActiveAbilities)
+        {
+            if (abilityToCancel == ability) continue;
+            abilityToCancel.StopCast();
+        }
     }
 
     #endregion

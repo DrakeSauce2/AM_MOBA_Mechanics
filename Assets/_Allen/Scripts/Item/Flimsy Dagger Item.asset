@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c19fe989c72700c4ebbbf6d76cee26e3, type: 3}
-  m_Name: TestItem
+  m_Name: Flimsy Dagger Item
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 15bbbfdfa172f0048b3e3ba8ceab6e6d, type: 3}
   itemStats: {fileID: 11400000, guid: a3ee298477dea5a4993f902404d36752, type: 2}
-  itemDescription: 'Test Item
+  itemDescription: 'Flimsy Dagger
 
     Physical Power: 5
 

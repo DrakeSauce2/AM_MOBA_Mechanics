@@ -18,3 +18,5 @@ MonoBehaviour:
   abilityOutlinePrefab: {fileID: 5339056299074291446, guid: 6eae5b45c99673c49ba4ebb27e428eb3,
     type: 3}
   outlinePositionOffset: {x: 0, y: 0, z: 0}
+  manaCost: 75
+  baseDamage: 150

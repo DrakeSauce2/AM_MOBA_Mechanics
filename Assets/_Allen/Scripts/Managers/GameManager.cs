@@ -42,6 +42,15 @@ public class GameManager : MonoBehaviour
             player.InitializePlayerInfo(newPlayerInfo);
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
 }
 
 // Contains All the Variables Created At Start To Send To Player Character On Initialization

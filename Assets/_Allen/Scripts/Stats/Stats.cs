@@ -64,7 +64,7 @@ public class Stats : ScriptableObject
         if (statsDictionary.ContainsKey(stat))
         {
             statsDictionary[stat] += value;
-            onValueChanged?.Invoke(stat, value);
+            onValueChanged?.Invoke(stat, statsDictionary[stat]);
             return;
         }
         else

@@ -12,20 +12,23 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private List<ActiveAbility> activeAbilities = new List<ActiveAbility>(4);
     public List<ActiveAbility> ActiveAbilities { get { return activeAbilities; } }
 
-    public delegate void OnAbilityAdded(ActiveAbility ability);
-    public event OnAbilityAdded onAbilityAdded;
+    private Stats stats;
 
-    public void Init(GameObject owner)
+    public void Init(GameObject owner, Stats owningStats)
     {
+        stats = owningStats;    
+
         for (int i = 0; i < activeAbilities.Count; i++)
         {
-            activeAbilities[i].Init(this, owner, slotList[i]);
+            activeAbilities[i].Init(this, owner, slotList[i], owningStats);
         }
     }
 
-    public void TryUseAbility(int index)
+    public void TryUseAbility(Animator animator, int index)
     {
-        activeAbilities[index].Cast();
+        if(stats.TryGetStatValue(Stat.MANA) > 0)
+
+        activeAbilities[index].Cast(animator, index);
     }
 
 

@@ -32,6 +32,12 @@ public class ActiveAbility : ScriptableObject
     private GameObject instancedAbilityOutline;
     [SerializeField] private Vector3 outlinePositionOffset;
 
+    [Header("Mana Cost")]
+    [SerializeField] private float manaCost;
+
+    [Header("Base Damage")]
+    [SerializeField] private float baseDamage;
+
     //
 
     public delegate void OnAbilityStart();
@@ -43,7 +49,9 @@ public class ActiveAbility : ScriptableObject
 
     //
 
-    private bool onCooldown = false;
+    public bool onCooldown { get; private set; }
+
+    private Stats stats;
 
     public AbilityComponent OwningAblityComponet
     {
@@ -52,20 +60,24 @@ public class ActiveAbility : ScriptableObject
     }
 
 
-    public void Init(AbilityComponent abilityComponent, GameObject owner, AbilitySlot abilitySlot)
+    public void Init(AbilityComponent abilityComponent, GameObject owner, AbilitySlot abilitySlot, Stats owningStats)
     {
         OwningAblityComponet = abilityComponent;
         Owner = owner;
+        stats = owningStats;
+
+        onCooldown = false;
+
         slot = abilitySlot;
         slot.Init(this, abilityImageSprite);
 
-        instancedAbilityOutline = Instantiate(abilityOutlinePrefab, Owner.transform.position + outlinePositionOffset,
+        instancedAbilityOutline = Instantiate(abilityOutlinePrefab, Owner.transform.position,
                                               Quaternion.identity, Owner.transform);
 
         instancedAbilityOutline.SetActive(false);
     }
 
-    public void Cast()
+    public void Cast(Animator animator, int index)
     {
         if (onCooldown) return;
 
@@ -75,11 +87,11 @@ public class ActiveAbility : ScriptableObject
                 StartAbility();
                 return;
             case CastingState.CAST:
-                
+                animator.SetTrigger($"Ability{index + 1}");
                 UseAbility();
                 return;
             case CastingState.INPROGRESS:
-
+                
                 return;
         }
 
@@ -109,8 +121,20 @@ public class ActiveAbility : ScriptableObject
     {   
         onAbilityStart?.Invoke();  
         
-        instancedAbilityOutline.SetActive(true);
+        instancedAbilityOutline.SetActive(false);
 
+        GameObject damageArea = Instantiate(abilityOutlinePrefab, Owner.transform.position,
+                                            Owner.transform.rotation);
+
+        Color color = new Color(1, 1, 1, 0);
+        damageArea.GetComponentInChildren<MeshRenderer>().material.color = color;
+
+        DamageTrigger damageTrigger = damageArea.AddComponent<DamageTrigger>();
+        damageTrigger.Init(Owner, baseDamage + stats.TryGetStatValue(Stat.PHYSICAL_POWER) * stats.TryGetStatValue(Stat.PHYSICAL_POWER_SCALE) + 
+                                  stats.TryGetStatValue(Stat.MAGICAL_POWER) * stats.TryGetStatValue(Stat.MAGICAL_POWER_SCALE),
+                                  0.5f);
+
+        stats.TryAddStatValue(Stat.MANA, -manaCost);
         StartCooldown();
 
         EndAbility();

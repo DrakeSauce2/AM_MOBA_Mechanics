@@ -34,9 +34,9 @@ public class AbilitySlot : MonoBehaviour
             cooldownTimeLeft -= Time.deltaTime;
 
             abilityCooldownFill.fillAmount = 1 - (cooldownTimeLeft / cooldownDuration);
-            cooldownTimeText.text = (cooldownDuration - cooldownTimeLeft).ToString("F0");
+            cooldownTimeText.text = (cooldownTimeLeft).ToString("F1");
 
-            abilityCooldownFill.gameObject.SetActive(abilityCooldownFill.fillAmount > 0);
+            abilityCooldownFill.gameObject.SetActive(cooldownTimeLeft > 0.1);
 
             yield return new WaitForEndOfFrame();
         }
