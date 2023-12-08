@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7412e305cd0b2954fbe5cf248437e405, type: 3}
   m_Name: ChildNode
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 6d4be93e0e03d7e48a44d5a073d58e52, type: 2}
   children:
   - {fileID: 11400000, guid: 0c803db4d8883dd469dae444f327dbb6, type: 2}
   - {fileID: 11400000, guid: d513d2817d562254db18512859bfc613, type: 2}

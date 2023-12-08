@@ -147,7 +147,6 @@ public class Stats : ScriptableObject
             case Stat.LEVELUP_COST:
             case Stat.ITEMSELL_COST:
             case Stat.ITEMBUY_COST:
-            case Stat.GOLD:
             case Stat.EXPERIENCE:
             case Stat.PHYSICAL_POWER_SCALE:
             case Stat.MAGICAL_POWER_SCALE:
@@ -191,7 +190,10 @@ public enum Stat
     BASICATTACKDAMAGE,
     LEVEL, // Static
     PHYSICAL_POWER_SCALE, // Static
-    MAGICAL_POWER_SCALE // Static
+    MAGICAL_POWER_SCALE, // Static
+    MP5,
+    HP5,
+    GP5
 }
 
 #endregion

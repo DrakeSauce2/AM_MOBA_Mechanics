@@ -62,7 +62,7 @@ MonoBehaviour:
     - 0
     incrementIndexValue: 0
   - statType: 0
-    statValue: 0
+    statValue: 1000
     incrementValues:
     - 0
     - 0
@@ -86,7 +86,7 @@ MonoBehaviour:
     - 0
     incrementIndexValue: 0
   - statType: 1
-    statValue: 5
+    statValue: 1000
     incrementValues:
     - 0
     - 0
@@ -166,7 +166,7 @@ MonoBehaviour:
     incrementValues: []
     incrementIndexValue: 0
   - statType: 14
-    statValue: 12
+    statValue: 5
     incrementValues: []
     incrementIndexValue: 0
   - statType: 16
@@ -179,5 +179,17 @@ MonoBehaviour:
     incrementIndexValue: 0
   - statType: 18
     statValue: 0.1
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 19
+    statValue: 22.5
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 20
+    statValue: 15.5
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 21
+    statValue: 7
     incrementValues: []
     incrementIndexValue: 0

@@ -9,6 +9,9 @@ public class ShopItem : MonoBehaviour
 
     Button button;
 
+    public delegate void OnItemPurchase(bool state);
+    public event OnItemPurchase onItemPurchase;
+
     private bool isPurchased = false;
 
     public void Init(Item item)
@@ -30,6 +33,7 @@ public class ShopItem : MonoBehaviour
     public void SetPurchased(bool state)
     {
         isPurchased = state;
+        onItemPurchase?.Invoke(state);
     }
 
     public bool IsPurchased()

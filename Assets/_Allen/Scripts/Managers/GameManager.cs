@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         Stats victimStats = victimCharacter.GetStats();
 
         float experienceToGive = victimStats.TryGetStatValue(Stat.LEVEL) * 12f;
+
+        instigatingStats.TryAddStatValue(Stat.GOLD, 150f);
         instigatingStats.TrySetStatValue(Stat.EXPERIENCE, instigatingStats.TryGetStatValue(Stat.EXPERIENCE) + experienceToGive);
 
     }

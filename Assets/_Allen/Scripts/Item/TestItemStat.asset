@@ -13,23 +13,15 @@ MonoBehaviour:
   m_Name: TestItemStat
   m_EditorClassIdentifier: 
   statsList:
-  - statType: 2
-    statValue: 2
-    incrementValues: []
-    incrementIndexValue: 0
-  - statType: 11
-    statValue: 250
-    incrementValues: []
-    incrementIndexValue: 0
   - statType: 5
-    statValue: 80
+    statValue: 5
     incrementValues: []
     incrementIndexValue: 0
   - statType: 9
-    statValue: 1000
+    statValue: 250
     incrementValues: []
     incrementIndexValue: 0
   - statType: 10
-    statValue: 750
+    statValue: 125
     incrementValues: []
     incrementIndexValue: 0

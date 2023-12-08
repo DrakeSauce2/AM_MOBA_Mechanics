@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform playerBuffIconsTransform;
     [SerializeField] private RectTransform playerDebuffIconsTransform;
     [SerializeField] private RectTransform shopTreeTransform;
+    [SerializeField] private RectTransform linePrefabTransform;
    
     public RectTransform PlayerHealthGaugeTransform { get { return playerHealthGaugeTransform; }  }
     public RectTransform PlayerManaGaugeTransform { get { return playerManaGaugeTransform; } }
@@ -43,6 +44,8 @@ public class UIManager : MonoBehaviour
     public RectTransform PlayerBuffIconsTransform { get { return playerBuffIconsTransform; } }
     public RectTransform PlayerDebuffIconsTransform { get { return playerDebuffIconsTransform; } }
     public RectTransform ShopTreeTransform { get { return shopTreeTransform; } }
+    public RectTransform LinePrefabTransform { get { return linePrefabTransform; } }
+
     public Transform CanvasTransform { get; private set; }
 
     private void Awake()

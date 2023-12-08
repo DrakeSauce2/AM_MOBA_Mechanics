@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d94d9374c6b5a499bdebe4145684d7, type: 3}
+  m_Name: OldHeroSword Stat
+  m_EditorClassIdentifier: 
+  statsList:
+  - statType: 2
+    statValue: 2
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 5
+    statValue: 50
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 9
+    statValue: 600
+    incrementValues: []
+    incrementIndexValue: 0
+  - statType: 10
+    statValue: 300
+    incrementValues: []
+    incrementIndexValue: 0

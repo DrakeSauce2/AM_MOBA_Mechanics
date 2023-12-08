@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19fe989c72700c4ebbbf6d76cee26e3, type: 3}
+  m_Name: Barb Dagger
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: ed9a3e4cc842e9349816c48bdbd875e8, type: 3}
+  itemStats: {fileID: 11400000, guid: 73491a83ec852ac4fa21b6d0095ff743, type: 2}
+  itemDescription: 'Barb Dagger
+
+    Movement Speed: 1
+
+    Physical Power: 10
+
+'

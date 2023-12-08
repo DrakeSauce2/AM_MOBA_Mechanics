@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7412e305cd0b2954fbe5cf248437e405, type: 3}
   m_Name: ChildNode 6
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 92c2a822de098714fa504310e07b243f, type: 2}
   children: []

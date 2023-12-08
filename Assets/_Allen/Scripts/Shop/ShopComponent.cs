@@ -45,6 +45,9 @@ public class ShopComponent : MonoBehaviour
 
         playerStats.TryAddStatValue(Stat.GOLD, -selectedShopItem.item.ItemBuyCost);
         player.inventoryComponent.TryAddItemToInventory(selectedShopItem.item);
+
+        itemDescriptionText.text = $"PURCHASED \nItem Sell Cost: {selectedShopItem.item.ItemSellCost}";
+        selectedShopItem.SetPurchased(true);
     }
 
     public void SellItem()
@@ -54,12 +57,25 @@ public class ShopComponent : MonoBehaviour
 
         playerStats.TryAddStatValue(Stat.GOLD, selectedShopItem.item.ItemSellCost);
         player.inventoryComponent.RemoveItem(selectedShopItem.item);
+
+        itemDescriptionText.text = selectedShopItem.item.ItemDescription + $"\nItem Cost: {selectedShopItem.item.ItemBuyCost}" +
+                                                                           $"\nItem Sell Cost: {selectedShopItem.item.ItemSellCost}";
+        selectedShopItem.SetPurchased(false);
     }
 
     public void SelectShopItem(ShopItem selectedShopItem)
     {
         this.selectedShopItem = selectedShopItem;
-        itemDescriptionText.text = selectedShopItem.item.ItemDescription;
+
+        if(selectedShopItem.IsPurchased() == true)
+        {
+            itemDescriptionText.text = $"PURCHASED \nItem Sell Cost: {selectedShopItem.item.ItemSellCost}";
+        }
+        else
+        {
+            itemDescriptionText.text = selectedShopItem.item.ItemDescription + $"\nItem Cost: {selectedShopItem.item.ItemBuyCost}" +
+                                                                               $"\nItem Sell Cost: {selectedShopItem.item.ItemSellCost}";
+        }
     }
 
 

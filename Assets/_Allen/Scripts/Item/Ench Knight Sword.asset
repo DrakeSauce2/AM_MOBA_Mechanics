@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19fe989c72700c4ebbbf6d76cee26e3, type: 3}
+  m_Name: Ench Knight Sword
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 89064b64789adf44c95d91f195d43a23, type: 3}
+  itemStats: {fileID: 11400000, guid: 7d077c7b2411ca149ad5d5dee18c1967, type: 2}
+  itemDescription: 'Enchanted Knight Sword
+
+    Physical Power: 50
+
+'

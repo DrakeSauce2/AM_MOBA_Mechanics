@@ -13,8 +13,8 @@ public class ItemNode : ScriptableObject
     public ItemNode parent { get; private set; }
     public List<ItemNode> children = new List<ItemNode>();
 
-    private GameObject slotPrefab = null;
-    private ShopItem shopItem = null;
+    public GameObject slotPrefab { get; private set; }
+    public ShopItem shopItem { get; private set; }
 
     private List<GameObject> lines = new List<GameObject>();
 
@@ -32,12 +32,50 @@ public class ItemNode : ScriptableObject
         slotPrefab = Instantiate(UIManager.Instance.ItemSlotPrefab, iconPosition, 
                                  Quaternion.identity, UIManager.Instance.ShopTreeTransform);
 
-        if(item != null)
-            slotPrefab.GetComponent<Image>().sprite = item.ItemIcon;
-
-        shopItem = slotPrefab.GetComponent<ShopItem>();
+        shopItem = slotPrefab.GetComponentInChildren<ShopItem>();
+        shopItem.gameObject.GetComponent<Image>().sprite = item.ItemIcon;
         shopItem.Init(item);
+        shopItem.onItemPurchase += ItemPurchased;
+
+        if (!IsRoot())
+        {
+            Color color = new Color(.5f, .5f, .5f);
+            shopItem.gameObject.GetComponent<Image>().color = color;
+        }
+
         slotPrefab.name = name;
+    }
+
+    private void ItemPurchased(bool state)
+    {
+        Debug.Log("Node Item Purchased");
+
+        if(state == true)
+        {
+            Color color = new Color(.5f, .5f, .5f);
+            shopItem.gameObject.GetComponent<Image>().color = color;
+
+            foreach (ItemNode child in children)
+            {
+                color = new Color(1f, 1f, 1f);
+                child.shopItem.gameObject.GetComponent<Image>().color = color;
+            }
+
+        }
+        else
+        {
+            Color color = new Color(1f, 1f, 1f);
+            shopItem.gameObject.GetComponent<Image>().color = color;
+
+            foreach (ItemNode child in children)
+            {
+                if (child.shopItem.IsPurchased()) continue;
+
+                color = new Color(0.5f, 0.5f, 0.5f);
+                child.shopItem.gameObject.GetComponent<Image>().color = color;
+            }
+
+        }
     }
 
     public void CreateNodes(Vector2 position)
@@ -72,7 +110,7 @@ public class ItemNode : ScriptableObject
         GameObject line = new GameObject("Shop Line");
         line.AddComponent<CanvasRenderer>();
         line.AddComponent<RectTransform>();
-        line.transform.SetParent(UIManager.Instance.ShopTreeTransform);
+        line.transform.SetParent(UIManager.Instance.LinePrefabTransform);
         ShopItemLine itemLine = line.AddComponent<ShopItemLine>();
         itemLine.Init(startPosition, endPosition, lineThickness);
 

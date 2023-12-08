@@ -11,9 +11,13 @@ public class PlayerCharacter : Character
     private PlayerInfo playerInfo;
 
     [Header("Shop Component")]
-    [SerializeField] ShopComponent shopComponent;
+    [SerializeField] private ShopComponent shopComponent;
+
+    private AbilityComponent abilityComponent;
 
     public InventoryComponent inventoryComponent { get; private set; }
+
+    private StatsPerSecond statsPerSecond;
 
     Vector2 animInput = Vector2.zero;
     Vector2 refVel = Vector2.zero;
@@ -33,6 +37,12 @@ public class PlayerCharacter : Character
 
         SetBasicAttack(gameObject);
         inventoryComponent.Init(GetStats());
+
+        statsPerSecond = GetComponent<StatsPerSecond>();
+        statsPerSecond.Init(GetStats());
+
+        abilityComponent = gameObject.GetComponent<AbilityComponent>();
+        abilityComponent.Init(this.gameObject);
 
         isInitialized = true;
     }
@@ -73,32 +83,36 @@ public class PlayerCharacter : Character
 
     private void CancelAbility(InputAction.CallbackContext context)
     {
-        /*
-        foreach (ActiveAbility ability in activeAbilities)
+        foreach (ActiveAbility ability in abilityComponent.ActiveAbilities)
         {
             ability.StopCast();
         }
-        */
     }
 
     private void StartCastAbility_1(InputAction.CallbackContext context)
     {
-        //activeAbilities[0].Cast(animator, 0);
+        Debug.Log(abilityComponent);
+        Debug.Log(abilityComponent.ActiveAbilities.Count);
+        abilityComponent.TryUseAbility(0);
+        animator.SetTrigger($"Ability1");
     }
 
     private void StartCastAbility_2(InputAction.CallbackContext context)
     {
-        //activeAbilities[1].Cast(animator, 1);
+        abilityComponent.TryUseAbility(1);
+        animator.SetTrigger($"Ability2");
     }
 
     private void StartCastAbility_3(InputAction.CallbackContext context)
     {
-        //activeAbilities[2].Cast(animator, 2);
+        abilityComponent.TryUseAbility(2);
+        animator.SetTrigger($"Ability3");
     }
 
     private void StartCastAbility_4(InputAction.CallbackContext context)
     {
-        //activeAbilities[3].Cast(animator, 3);
+        abilityComponent.TryUseAbility(3);
+        animator.SetTrigger($"Ability4");
     }
 
     #endregion

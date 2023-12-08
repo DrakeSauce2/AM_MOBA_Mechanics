@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,9 +7,9 @@ using UnityEngine.UI;
 
 public enum CastingState
 {
-    NONE,
     STARTCAST,
-    CASTING
+    CAST,
+    INPROGRESS
 }
 
 [CreateAssetMenu(menuName = "Ability/BaseAcitveAbility")]
@@ -22,9 +23,9 @@ public class ActiveAbility : ScriptableObject
     [Header("UI")]
     [SerializeField] private Sprite abilityImageSprite;
     private AbilitySlot slot;
-    [Space]
+    
+    [Header("Cooldown")]
     [SerializeField] private float cooldown;
-    float currentCooldown = 0;
 
     [Header("Ability Outline")]
     [SerializeField] private GameObject abilityOutlinePrefab;
@@ -38,13 +39,25 @@ public class ActiveAbility : ScriptableObject
     public OnAbilityStart onAbilityStart;   
     public OnAbilityEnd onAbilityEnd;
 
+    public Action<float> onCooldownStarted;
+
     //
 
-    public void Init(GameObject owner, AbilitySlot abilitySlot)
+    private bool onCooldown = false;
+
+    public AbilityComponent OwningAblityComponet
     {
+        get;
+        private set;
+    }
+
+
+    public void Init(AbilityComponent abilityComponent, GameObject owner, AbilitySlot abilitySlot)
+    {
+        OwningAblityComponet = abilityComponent;
         Owner = owner;
         slot = abilitySlot;
-        slot.Init(abilityImageSprite);
+        slot.Init(this, abilityImageSprite);
 
         instancedAbilityOutline = Instantiate(abilityOutlinePrefab, Owner.transform.position + outlinePositionOffset,
                                               Quaternion.identity, Owner.transform);
@@ -52,20 +65,20 @@ public class ActiveAbility : ScriptableObject
         instancedAbilityOutline.SetActive(false);
     }
 
-    public void Cast(Animator characterAnimator, int abilityIndex)
+    public void Cast()
     {
-        if (currentCooldown > 0) return;
+        if (onCooldown) return;
 
         switch (castingState)
         {
-            case CastingState.NONE:
+            case CastingState.STARTCAST:
                 StartAbility();
                 return;
-            case CastingState.STARTCAST:
-                characterAnimator.SetTrigger($"Ability{abilityIndex + 1}");
+            case CastingState.CAST:
+                
                 UseAbility();
                 return;
-            case CastingState.CASTING:
+            case CastingState.INPROGRESS:
 
                 return;
         }
@@ -76,11 +89,13 @@ public class ActiveAbility : ScriptableObject
     public void StopCast()
     {
         instancedAbilityOutline.SetActive(false);
+        castingState = CastingState.STARTCAST;
     }
 
     private void StartAbility()
     {
         instancedAbilityOutline.SetActive(true);
+        castingState = CastingState.CAST;
     }
 
     private void EndAbility()
@@ -95,16 +110,12 @@ public class ActiveAbility : ScriptableObject
         onAbilityStart?.Invoke();  
         
         instancedAbilityOutline.SetActive(true);
-        //StartCooldown();
+
+        StartCooldown();
 
         EndAbility();
     }
-
-    ///
-    /// TODO : | Create AbilityComponent Class To Handle Ability Coroutines |
-    ///        v                                                            v
-
-    /*
+    
     void StartCooldown()
     {
         StartCoroutine(CooldownCoroutine());
@@ -118,10 +129,15 @@ public class ActiveAbility : ScriptableObject
     IEnumerator CooldownCoroutine()
     {
         onCooldown = true;
-        onCooldownStarted?.Invoke(cooldownDuration);
-        yield return new WaitForSeconds(cooldownDuration);
+        onCooldownStarted?.Invoke(cooldown);
+        castingState = CastingState.INPROGRESS;
+
+        yield return new WaitForSeconds(cooldown);
+
         onCooldown = false;
+        onAbilityEnd?.Invoke();
+        castingState = CastingState.STARTCAST;
     }
-    */
+    
 
 }
